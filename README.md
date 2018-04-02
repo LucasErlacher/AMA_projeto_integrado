@@ -13,3 +13,11 @@
 <p align="justify">A partir das informações cedidas pelos clientes (médicos e/ou pacientes), poderemos contar com um banco de dados contendo <b>informações sensíveis</b> como o endereço do paciente e que devem receber uma <b>maior segurança para evitar o vazamento desses dados</b>.</p>
 <p>As informações necessárias para efetuar o registro no sistema por parte dos pacientes são: <b>Nome Completo, Data de Nascimento, Endereço (Logradouro, Número, Complemento, Bairro, Cidade, Estado, CEP), CPF, Contatos (Telefone Residencial, Celular, E-Mail)</b>.</p>
 <p>As informações necessárias para efetuar o cadastro dos médicos são: <b>Nome Completo, Data de Nascimento, Endereço (Logradouro, Número, Complemento, Bairro, Cidade, Estado, CEP), CPF, Contatos (Telefone Comercial, Telefone Residencial, Celular, E-Mail), Registro Médico (Conselho Regional de Medicina, Nutrição,Psicologia), caso tenha, e Consultório em que trabalha atualmente</b>.</p>
+
+<hr>
+
+<h2>Requisitos:</h2>
+
+<p><a href="https://github.com/LucasErlacher/AMA_projeto_integrado/blob/master/imagens/Requisitos%20do%20Sistema.pdf">Funcionais, Não Funcionais e Regras de Negócio</a></p>
+
+
