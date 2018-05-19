@@ -1,4 +1,4 @@
-package Teste;
+package br.com.ama.testes;
 
 import static org.junit.Assert.*;
 
@@ -25,9 +25,12 @@ public class TesteConnectionFactory {
 		}
 		ConnectionFactory fabricaConexao = new ConnectionFactory();
 		Connection resultadoConexao = fabricaConexao.getConnection();
+		
+		
 		try {
 			assertEquals(con.isReadOnly(),resultadoConexao.isReadOnly());
 		} catch (SQLException e) {
-		}
+		}		
+		
 	}
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.ama.connection.ConnectionFactory;
+import br.com.ama.enums.EUsuario;
 import br.com.ama.modelo.Paciente;;
 
 public class PacienteDAO {
@@ -37,9 +38,11 @@ public class PacienteDAO {
 				paciente.setEmail(rs.getString("email"));
 				paciente.setLogin(rs.getString("cpf"));
 				paciente.setSenha(rs.getString("senha"));
+				
 				Calendar data = Calendar.getInstance();
 		        data.setTime(rs.getDate("datanascimento"));
-		        paciente.setDataNascimento(data);
+		        
+		        paciente.setDataNascimento(data);	        
 		        pacientes.add(paciente);
 			}
 			this.conexao.close();
