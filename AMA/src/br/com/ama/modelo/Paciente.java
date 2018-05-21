@@ -16,6 +16,23 @@ public class Paciente {
 	private EUsuario tipoUsuario;
 	private ESexo tipoSexo;
 	
+	public Paciente(int _id, String _login, String _senha, String _cpf, Calendar _dataNascimento, String _nome,String _email,
+					EUsuario _tipousuario, ESexo _tipoSexo) {
+		this.id=_id;
+		this.login=_login;
+		this.senha=_senha;
+		this.cpf=_cpf;
+		this.dataNascimento=_dataNascimento;
+		this.nome=_nome;
+		this.email=_email;
+		this.tipoUsuario=_tipousuario;
+		this.tipoSexo=_tipoSexo;		
+	}
+	
+	public Paciente() {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
