@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class OiMundo
  */
-@WebServlet("/OiMundo")
+@WebServlet(name = "servlet_Oi", urlPatterns = {"/OiMundo","/OlaMundo"})
 public class OiMundo extends HttpServlet {
 	@Override 
 	protected void service(HttpServletRequest request,
