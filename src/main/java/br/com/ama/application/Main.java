@@ -26,6 +26,6 @@ public class Main {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
+         // Comentario para teste de commit
     }
 }
