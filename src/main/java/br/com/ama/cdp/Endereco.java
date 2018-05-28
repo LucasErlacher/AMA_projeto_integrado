@@ -8,6 +8,8 @@ public class Endereco {
     private Bairro bairro;
     private Cidade cidade;
     private Estado estado;
+    private String complemento;
+    private String numero;
 
     //Construtor
     public Endereco(int _id, String _cep, String _logradouro, Bairro _bairro, Cidade _cidade, Estado _estado){
