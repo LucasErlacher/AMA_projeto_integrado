@@ -1,1 +1,1 @@
-#AMA - Projeto Integradoo
+#AMA - Projeto Integrado
