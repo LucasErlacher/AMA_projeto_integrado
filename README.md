@@ -1,1 +1,3 @@
-#AMA - Projeto Integrado
+# AMA - Projeto Integrado
+
+Equipe: Caio, Lucas e Tarcisio
