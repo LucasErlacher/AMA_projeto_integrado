@@ -5,14 +5,14 @@ public class Endereco {
     private int id;
     private String cep;
     private String logradouro;
-    private Bairro bairro;
-    private Cidade cidade;
-    private Estado estado;
+    private String bairro;
+    private String cidade;
+    private String estado;
     private String complemento;
     private String numero;
 
     //Construtor
-    public Endereco(int _id, String _cep, String _logradouro, Bairro _bairro, Cidade _cidade, Estado _estado){
+    public Endereco(int _id, String _cep, String _logradouro, String _bairro, String _cidade, String _estado){
         this.id=_id;
         this.cep=_cep;
         this.logradouro=_logradouro;
@@ -45,27 +45,27 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public Bairro getBairro() {
+    public String getBairro() {
         return bairro;
     }
 
-    public void setBairro(Bairro bairro) {
+    public void setBairro(String bairro) {
         this.bairro = bairro;
     }
 
-    public Cidade getCidade() {
+    public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(Cidade cidade) {
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

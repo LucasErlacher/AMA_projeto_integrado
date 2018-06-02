@@ -52,7 +52,7 @@ public class PacienteDAO {
     public void delete(Paciente paciente) {
         this.conexao = new ConnectionFactory().getConnection();
         try {
-            String query = "delete from paciente where id = ?";
+            String query = "delete if exists from paciente where id = ?";
             PreparedStatement stmt = this.conexao.prepareStatement(query);
             stmt.setInt(1, paciente.getId());
             stmt.executeUpdate();
@@ -87,27 +87,30 @@ public class PacienteDAO {
 
     }
 
-    public void update(Paciente paciente) {
+    public int update(Paciente paciente) {
+        int i = 0;
         this.conexao = new ConnectionFactory().getConnection();
         try {
             String query = "update paciente set senha = ?,  email=? "
-                    + " where id=? ";
+                    + " where cpf like ? ";
             PreparedStatement stmt = conexao.prepareStatement(query);
             stmt.setString(1, paciente.getSenha());
             stmt.setString(2, paciente.getEmail());
-            stmt.setInt(3, paciente.getId());
+            stmt.setString(3, paciente.getCpf());
             stmt.executeUpdate();
+            i = stmt.executeUpdate();
             this.conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return i;
     }
 
     public Paciente getByLoginAndSenha(String _login, String _senha) {
         Paciente paciente = new Paciente();
         this.conexao = new ConnectionFactory().getConnection();
         try {
-            String query = "select * from paciente where login = ? and senha=?";
+            String query = "select * from paciente where cpf = ? and senha=?";
             PreparedStatement stmt;
             stmt = this.conexao.prepareStatement(query);
             stmt.setString(1, _login);
@@ -115,7 +118,7 @@ public class PacienteDAO {
             ResultSet rs;
             rs = stmt.executeQuery();            
             while (rs.next()) {
-                paciente.setId(Integer.parseInt(rs.getString("id")));
+                paciente.setId(Integer.parseInt(rs.getString("idpaciente")));
                 paciente.setNome(rs.getString("nome"));
                 paciente.setCpf(rs.getString("cpf"));
                 paciente.setEmail(rs.getString("email"));
@@ -123,6 +126,7 @@ public class PacienteDAO {
 
                 Calendar data = Calendar.getInstance();
                 data.setTime(rs.getDate("datanascimento"));
+                
                 paciente.setDataNascimento(data);
             }
             this.conexao.close();
@@ -136,19 +140,18 @@ public class PacienteDAO {
         Paciente paciente = new Paciente();
         this.conexao = new ConnectionFactory().getConnection();
         try {
-            String query = "select * from paciente where cpf = ? ";
+            String query = "select * from paciente where cpf in ( ? ) ";
             PreparedStatement stmt;
             stmt = this.conexao.prepareStatement(query);
             stmt.setString(1, _cpf);
             ResultSet rs;
             rs = stmt.executeQuery();            
             while (rs.next()) {
-                paciente.setId(Integer.parseInt(rs.getString("id")));
+                paciente.setId(Integer.parseInt(rs.getString("idpaciente")));
                 paciente.setNome(rs.getString("nome"));
                 paciente.setCpf(rs.getString("cpf"));
                 paciente.setEmail(rs.getString("email"));
                 paciente.setSenha(rs.getString("senha"));
-
                 Calendar data = Calendar.getInstance();
                 data.setTime(rs.getDate("datanascimento"));
                 paciente.setDataNascimento(data);

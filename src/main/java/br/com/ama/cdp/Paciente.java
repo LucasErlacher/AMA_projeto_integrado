@@ -56,7 +56,7 @@ public class Paciente {
     }
 
     public String getCpf() {
-        return cpf;
+        return cpf!=null? cpf : "null";
     }
 
     public void setCpf(String _cpf) {

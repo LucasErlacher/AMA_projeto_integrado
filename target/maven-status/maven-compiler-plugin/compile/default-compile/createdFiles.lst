@@ -1,4 +1,4 @@
-br\com\ama\cdp\Bairro.class
+br\com\ama\util\Excecoes\DadoInvalidoException.class
 br\com\ama\cdp\EUsuario.class
 br\com\ama\cdp\AgenteSaude.class
 br\com\ama\cdp\EDiaSemana.class
@@ -10,9 +10,8 @@ br\com\ama\cdp\Consulta.class
 br\com\ama\cgd\DAO\ConnectionFactory.class
 br\com\ama\cdp\ESexo.class
 br\com\ama\cdp\LocalAtendimento.class
-br\com\ama\cdp\Estado.class
 br\com\ama\cgd\DAO\PacienteDAO.class
+br\com\ama\cgt\AplPaciente.class
 br\com\ama\cgd\DAO\EnderecoDAO.class
 br\com\ama\cdp\ETipoRegistro.class
-br\com\ama\cdp\Cidade.class
 br\com\ama\cdp\Paciente.class

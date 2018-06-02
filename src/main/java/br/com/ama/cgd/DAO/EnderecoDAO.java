@@ -97,9 +97,9 @@ public class EnderecoDAO {
             int idEndereco = rs.getInt("IdEndereco");
             String logradouro = rs.getString("Logradouro");
             String cep = rs.getString("CEP");
-            Bairro bairro = new Bairro(rs.getInt("IdBairro"), rs.getString("Bairro"));
-            Cidade cidade = new Cidade(rs.getInt("IdCidade"), rs.getString("Cidade"));
-            Estado estado = new Estado(rs.getInt("IdEstado"), rs.getString("Estado"));
+            String bairro = rs.getString("Bairro");
+            String cidade = rs.getString("Cidade");
+            String estado = rs.getString("Estado");
             
             endereco = new Endereco(idEndereco, cep, logradouro, bairro, cidade, estado);
             this.conexao.close();
