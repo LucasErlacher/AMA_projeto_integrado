@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Tarcisio
  */
 public class Main {
-    public static void main(String[] args ){
+    public static void main(String[] args){
         Connection con = new ConnectionFactory().getConnection();
         
         try {
@@ -26,7 +26,6 @@ public class Main {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-	System.out.println("Apenas Testando o GitHub");
         
     }
 }
