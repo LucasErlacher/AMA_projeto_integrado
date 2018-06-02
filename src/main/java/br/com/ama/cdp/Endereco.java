@@ -2,7 +2,7 @@ package br.com.ama.cdp;
 
 public class Endereco {
 
-    private int id;
+    private int idendereco;
     private String cep;
     private String logradouro;
     private String bairro;
@@ -13,20 +13,23 @@ public class Endereco {
 
     //Construtor
     public Endereco(int _id, String _cep, String _logradouro, String _bairro, String _cidade, String _estado){
-        this.id=_id;
+        this.idendereco=_id;
         this.cep=_cep;
         this.logradouro=_logradouro;
         this.bairro=_bairro;
         this.cidade=_cidade;
         this.estado=_estado;
     }
+    
+    public Endereco(){
+    }
     //Métodos
     public int getId() {
-        return id;
+        return idendereco;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idendereco) {
+        this.idendereco = idendereco;
     }
 
     public String getCep() {
