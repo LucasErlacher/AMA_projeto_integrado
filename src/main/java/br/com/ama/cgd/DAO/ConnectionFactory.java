@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 
     //private static final String DRIVER = "PostgreSQL AMA";
-    private static final String URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/yvbafcvx";
-    private static final String USER = "yvbafcvx";
-    private static final String PASS = "osEf57D9s7viNhSnefqWCXTbQABn48ez";
+    private static final String URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/sxkmvllg";
+    private static final String USER = "sxkmvllg";
+    private static final String PASS = "RgEYHVSVFZkV08cXHGOymH9wO6HOllmP";
 
     public Connection getConnection() {
         Connection con = null;

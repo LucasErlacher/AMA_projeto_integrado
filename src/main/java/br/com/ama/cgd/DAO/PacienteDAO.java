@@ -30,7 +30,7 @@ public class PacienteDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Paciente paciente = new Paciente();
-                paciente.setId(Integer.parseInt(rs.getString("id")));
+                paciente.setId(Integer.parseInt(rs.getString("idpaciente")));
                 paciente.setNome(rs.getString("nome"));
                 paciente.setCpf(rs.getString("cpf"));
                 paciente.setEmail(rs.getString("email"));
@@ -63,26 +63,27 @@ public class PacienteDAO {
 
     }
 
-    public void insert(Paciente paciente) {
+    public int  insert(Paciente paciente) {
+        int i = 0;
         this.conexao = new ConnectionFactory().getConnection();
         try {
-            String query = "insert into paciente (id, senha,cpf,datanascimento,nome,email,idtipousuario,idsexo,idendereco)"
+            String query = "insert into paciente (idpaciente, senha,cpf,datanascimento,nome,email,idtipousuario,idsexo)"
                     + " values "
-                    + " (?,?,?,?,?,?,?,?,select max(id) from endereco) ";
+                    + " (default,?,?,?,?,?,?,?) ";
             PreparedStatement stmt = conexao.prepareStatement(query);
-            stmt.setString(1, "default");
-            stmt.setString(2, paciente.getSenha());
-            stmt.setString(3, paciente.getCpf());
-            stmt.setDate(4, (java.sql.Date) new Date(paciente.getDataNascimento().getTimeInMillis()));
-            stmt.setString(5, paciente.getNome());
-            stmt.setString(6, paciente.getEmail());
-            stmt.setInt(7, paciente.getTipoUsuario().getCodigo());
-            stmt.setInt(8, paciente.getTipoSexo().getCodigo());
-            stmt.executeUpdate();
+            stmt.setString(1, paciente.getSenha());
+            stmt.setString(2, paciente.getCpf());
+            stmt.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTimeInMillis()));
+            stmt.setString(4, paciente.getNome());
+            stmt.setString(5, paciente.getEmail());
+            stmt.setInt(6, paciente.getTipoUsuario().getCodigo());
+            stmt.setInt(7, paciente.getTipoSexo().getCodigo());
+            i = stmt.executeUpdate();
             this.conexao.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return i;
 
     }
 
@@ -111,6 +112,34 @@ public class PacienteDAO {
             stmt = this.conexao.prepareStatement(query);
             stmt.setString(1, _login);
             stmt.setString(2, _senha);
+            ResultSet rs;
+            rs = stmt.executeQuery();            
+            while (rs.next()) {
+                paciente.setId(Integer.parseInt(rs.getString("id")));
+                paciente.setNome(rs.getString("nome"));
+                paciente.setCpf(rs.getString("cpf"));
+                paciente.setEmail(rs.getString("email"));
+                paciente.setSenha(rs.getString("senha"));
+
+                Calendar data = Calendar.getInstance();
+                data.setTime(rs.getDate("datanascimento"));
+                paciente.setDataNascimento(data);
+            }
+            this.conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return paciente;
+    }
+    
+    public Paciente getByCPF(String _cpf){
+        Paciente paciente = new Paciente();
+        this.conexao = new ConnectionFactory().getConnection();
+        try {
+            String query = "select * from paciente where cpf = ? ";
+            PreparedStatement stmt;
+            stmt = this.conexao.prepareStatement(query);
+            stmt.setString(1, _cpf);
             ResultSet rs;
             rs = stmt.executeQuery();            
             while (rs.next()) {
