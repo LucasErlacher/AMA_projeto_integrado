@@ -71,5 +71,4 @@ public class Endereco {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 }
