@@ -5,45 +5,56 @@
  */
 package br.com.ama.cdp;
 
-
-import java.util.Calendar;
-
+import org.joda.time.LocalTime;
+import org.postgresql.util.PGInterval;
 
 public class HorarioAtendimento {
-    Calendar horaInicio;
-    Calendar horaFinal;
-    Calendar intervalo;
-    String diaSemana;
+    private LocalTime horaInicio;
+    private LocalTime horaFinal;
+    private PGInterval intervalo;
+    private String diaSemana;
 
-    public Calendar getHoraInicio() {
-        return horaInicio;
+    public void setHoraInicio(String hora){
+        String[] time = hora.split(":");
+        horaInicio = new LocalTime(Integer.parseInt(time[0]),
+                                   Integer.parseInt(time[1]),
+                                   Integer.parseInt(time[2]));
+
     }
 
-    public void setHoraInicio(Calendar horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setHoraFinal(String hora){
+        String[] time = hora.split(":");
+        horaFinal = new LocalTime(Integer.parseInt(time[0]),
+                                  Integer.parseInt(time[1]),
+                                  Integer.parseInt(time[2]));
+
     }
 
-    public Calendar getHoraFinal() {
-        return horaFinal;
+    public void setIntervalo(String intervalo){
+        String[] tokens = intervalo.split(":");
+
+        PGInterval novo_intervalo = new PGInterval();
+
+        novo_intervalo.setHours(Integer.parseInt(tokens[0]));
+        novo_intervalo.setMinutes(Integer.parseInt(tokens[1]));
+        novo_intervalo.setSeconds(Integer.parseInt(tokens[2]));
+
+        this.intervalo = novo_intervalo;
     }
 
-    public void setHoraFinal(Calendar horaFinal) {
-        this.horaFinal = horaFinal;
-    }
-
-    public Calendar getIntervalo() {
-        return intervalo;
-    }
-
-    public void setIntervalo(Calendar intervalo) {
-        this.intervalo = intervalo;
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     public String getDiaSemana() {
         return diaSemana;
     }
 
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
+    public LocalTime getHoraInicio(){
+        return horaInicio;
+    }
+
+    public LocalTime getHoraFinal() {
+        return horaFinal;
     }
 }

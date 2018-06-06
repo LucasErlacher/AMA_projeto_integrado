@@ -12,7 +12,8 @@ public class AgenteSaude extends Paciente {
             String _nome, String _email, EUsuario _tipousuario, ESexo _tipoSexo,
             String _inscricao) {
 
-        super(_id, _senha, _cpf, _dataNascimento, _nome, _email, _tipousuario, _tipoSexo);
+        super(_id, _cpf, _senha, _dataNascimento, _nome, _email, _tipousuario, _tipoSexo);
+
         this.inscricao = _inscricao;
 
     }
