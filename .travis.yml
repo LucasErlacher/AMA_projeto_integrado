@@ -9,7 +9,7 @@ branches:
     - dev
     - devTarcisio
     - devLucas
-
+add-ons:
 mvn sonar:sonar \
   -Dsonar.organization=lucaserlacher-github \
   -Dsonar.host.url=https://sonarcloud.io \
