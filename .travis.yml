@@ -1,0 +1,19 @@
+language: java
+
+jdk:
+ - oraclejdk8 
+
+branches:
+  only:
+    - master
+    - dev
+    - devTarcisio
+    - devLucas
+
+mvn sonar:sonar \
+  -Dsonar.organization=lucaserlacher-github \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=568427be42f060ba3089bb4d5586b170dbd8e196
+  
+notifications:
+  slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
