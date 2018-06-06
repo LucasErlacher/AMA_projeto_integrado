@@ -1,7 +1,7 @@
-// Comentario para teste de commit
 package br.com.ama.cdp;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class AgenteSaude extends Paciente {
 
@@ -9,11 +9,10 @@ public class AgenteSaude extends Paciente {
     //private Estado estadoInsricao;
 
     //Constutor
-    public AgenteSaude(int _id, String _cpf, String _senha, Calendar _dataNascimento,
-            String _nome, String _email, EUsuario _tipousuario, ESexo _tipoSexo,
-            String _inscricao) {
+    public AgenteSaude(int _id, String _cpf, String _senha, Date _dataNascimento,
+            String _nome, String _email, int _enum_usuario, int _enum_sexo,String _inscricao) {
 
-        super(_id, _senha, _cpf, _dataNascimento, _nome, _email, _tipousuario, _tipoSexo);
+        super(_id, _senha, _cpf, _dataNascimento, _nome, _email, _enum_usuario, _enum_sexo);
         this.inscricao = _inscricao;
 
     }
@@ -26,11 +25,4 @@ public class AgenteSaude extends Paciente {
     public void setInscricao(String inscricao) {
         this.inscricao = inscricao;
     }
-
-//	public Estado getEstadoInsricao() {
-//		return estadoInsricao;
-//	}
-//	public void setEstadoInsricao(Estado estadoInsricao) {
-//		this.estadoInsricao = estadoInsricao;
-//	}
 }

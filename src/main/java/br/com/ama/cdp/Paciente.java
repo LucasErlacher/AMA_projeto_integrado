@@ -1,6 +1,7 @@
 package br.com.ama.cdp;
 
-import java.util.Calendar;
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Paciente {
 
@@ -11,17 +12,19 @@ public class Paciente {
     private String senha;
 
     //Dados Pessoais
-    private Calendar dataNascimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dataNascimento;
+    
     private String nome;
     private String email;
-    private ESexo tipoSexo;
+    private int enum_sexo; 
 
     //???????
-    private EUsuario tipoUsuario;
+    private int enum_usuario;
 
     //Construtor
-    public Paciente(int _id, String _cpf, String _senha, Calendar _dataNascimento,
-            String _nome, String _email, EUsuario _tipousuario, ESexo _tipoSexo) {
+    public Paciente(int _id, String _cpf, String _senha, Date _dataNascimento,
+            String _nome, String _email, int _enum_usuario, int _enum_sexo) {
 
         this.id = _id;
         this.senha = _senha;
@@ -29,8 +32,8 @@ public class Paciente {
         this.dataNascimento = _dataNascimento;
         this.nome = _nome;
         this.email = _email;
-        this.tipoUsuario = _tipousuario;
-        this.tipoSexo = _tipoSexo;
+        this.enum_usuario = _enum_usuario;
+        this.enum_sexo = _enum_sexo;
 
     }
 
@@ -63,11 +66,11 @@ public class Paciente {
         this.cpf = _cpf;
     }
 
-    public Calendar getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Calendar _dataNascimento) {
+    public void setDataNascimento(Date _dataNascimento) {
         this.dataNascimento = _dataNascimento;
     }
 
@@ -87,19 +90,19 @@ public class Paciente {
         this.email = _email;
     }
 
-    public EUsuario getTipoUsuario() {
-        return tipoUsuario;
+    public int getTipoUsuario() {
+        return this.enum_usuario;
     }
 
-    public void setTipoUsuario(EUsuario _tipoUsuario) {
-        this.tipoUsuario = _tipoUsuario;
+    public void setTipoUsuario(int _enum_usuario) {
+        this.enum_usuario = _enum_usuario;
     }
 
-    public ESexo getTipoSexo() {
-        return tipoSexo;
+    public int getTipoSexo() {
+        return this.enum_sexo;
     }
 
-    public void setTipoSexo(ESexo _tipoSexo) {
-        this.tipoSexo = _tipoSexo;
+    public void setTipoSexo(int _enum_sexo) {
+        this.enum_sexo = _enum_sexo;
     }
 }

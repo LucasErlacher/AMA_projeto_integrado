@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.ama.cgt;
 
+import br.com.ama.cdp.ESexo;
 import br.com.ama.cdp.Paciente;
 import br.com.ama.cgd.DAO.PacienteDAO;
 import br.com.ama.util.Excecoes.DadoInvalidoException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import org.postgresql.util.PSQLException;
 
 public class AplPaciente {
 
@@ -22,13 +20,20 @@ public class AplPaciente {
     }
 
     public int cadastrarPaciente(Paciente _paciente) {
-        if (validaPaciente(_paciente)) {
-            return pacienteDAO.insert(_paciente);
-        }
-        return 0;
+        if(validaPaciente(_paciente)){
+            try {
+                validaPaciente(_paciente);
+                 return pacienteDAO.insert(_paciente);            
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }        
+        return 0;        
     }
 
-    public Paciente consultarPacienteCPF(Paciente _paciente) {
+
+public Paciente consultarPacienteCPF(Paciente _paciente) {
+        System.out.println("Entrou no metodo da aplicacao e o CPF = " + _paciente.getCpf());
         Paciente pacientePeloCPF = pacienteDAO.getByCPF(_paciente.getCpf());
         return pacientePeloCPF;
     }
@@ -46,9 +51,10 @@ public class AplPaciente {
         paciente = pacienteDAO.getByCPF(paciente.getCpf());
         System.out.println("Seu nome eh: " + paciente.getNome());
         System.out.println("Seu email eh: " + paciente.getEmail());
+        System.out.println("Seu cpf eh: " + paciente.getCpf());
         System.out.println("Sua senhaeh: " + paciente.getSenha());        
-        Date date = paciente.getDataNascimento().getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = paciente.getDataNascimento();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String full = sdf.format(date);
         System.out.println("Sua data de nascimento eh: " + full);
     }
@@ -68,8 +74,10 @@ public class AplPaciente {
         }
         if (_paciente.getSenha() == null) {
             throw new DadoInvalidoException("O campo Senha está inválido.");
-        }
-        if (_paciente.getTipoSexo() == null) {
+        }        
+        ArrayList<ESexo> sexos = new ArrayList<>();
+        sexos.addAll(Arrays.asList(ESexo.values()));
+        if (!sexos.contains(ESexo.getByCodigo(_paciente.getTipoSexo()))) {
             throw new DadoInvalidoException("O campo Sexo está inválido.");
         }
         return true;

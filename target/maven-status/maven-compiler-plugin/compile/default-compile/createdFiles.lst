@@ -4,7 +4,6 @@ br\com\ama\cdp\AgenteSaude.class
 br\com\ama\cdp\EDiaSemana.class
 br\com\ama\cdp\HorarioAtendimento.class
 br\com\ama\cdp\Registro.class
-br\com\ama\application\Main.class
 br\com\ama\cdp\Endereco.class
 br\com\ama\cdp\Consulta.class
 br\com\ama\cgd\DAO\ConnectionFactory.class
@@ -13,5 +12,4 @@ br\com\ama\cdp\LocalAtendimento.class
 br\com\ama\cgd\DAO\PacienteDAO.class
 br\com\ama\cgt\AplPaciente.class
 br\com\ama\cgd\DAO\EnderecoDAO.class
-br\com\ama\cdp\ETipoRegistro.class
 br\com\ama\cdp\Paciente.class
