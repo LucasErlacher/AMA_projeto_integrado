@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="37" failures="0" name="br.com.ama.testes.BDDTest" time="0.83" errors="0" skipped="31">
+<testsuite tests="20" failures="0" name="br.com.ama.testes.BDDTest" time="10.665" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -17,7 +17,6 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Users\Tarcisio\Documents\NetBeansProjects\ProjetoAMA"/>
     <property name="java.runtime.version" value="1.8.0_131-b11"/>
-    <property name="netbeans.deploy" value="true"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_131\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
@@ -45,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_131\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -62,103 +61,24 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Scenario: Informa\u00E7oes validas" name="Given cliente informa conta\u002C senha e agencia valida" time="0.003">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes validas" name="When cliente solicitar o saldo" time="0.068">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes validas" name="Then o sistema informa o saldo" time="0.068">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes validas" name="Scenario: Informa\u00E7oes validas" time="0.068">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes validas" name="Scenario: Informa\u00E7oes validas" time="0.068"/>
-  <testcase classname="Scenario: Informa\u00E7oes invalidas" name="Given cliente informa conta\u002C senha ou agencia invalida" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes invalidas" name="When cliente solicitar o saldo" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes invalidas" name="Then o sistema informa um erro" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes invalidas" name="Scenario: Informa\u00E7oes invalidas" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Informa\u00E7oes invalidas" name="Scenario: Informa\u00E7oes invalidas" time="0"/>
-  <testcase classname="Scenario: depositar dinheiro" name="Given cliente informa conta\u002C senha e agencia valida" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="And o cliente possui 100 reais em conta" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="When cliente depositar 20 reais" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="Then o sistema informa que a opera\u00E7\u00E3o foi um sucesso" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="And a conta do cliente est\u00E1 com salda de 120 reais" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="Scenario: depositar dinheiro" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar dinheiro" name="Scenario: depositar dinheiro" time="0"/>
-  <testcase classname="Scenario: depositar envelope vazio" name="Given cliente informa conta\u002C agencia valida" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="And o cliente informa que h\u00E1 100 reais no envelope" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="But n\u00E3o h\u00E1 nenhum dinheiro no envelope" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="When cliente solicita o deposito do envelope" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="Then o sistema informa que n\u00E3o h\u00E1 dinheiro no envelope." time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="And o Saldo n\u00E3o \u00E9 modificado" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="Scenario: depositar envelope vazio" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: depositar envelope vazio" name="Scenario: depositar envelope vazio" time="0.001"/>
-  <testcase classname="Scenario: Saldo positivo" name="Given cliente tem 100 reais na conta" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Saldo positivo" name="When cliente solicitar a retirada de 100 reais" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Saldo positivo" name="Then o sistema aprova a retirada" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Saldo positivo" name="And o saldo atual \u00E9 de 0 reais" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Saldo positivo" name="Scenario: Saldo positivo" time="0">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Saldo positivo" name="Scenario: Saldo positivo" time="0"/>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="Given cliente tem 100 reais na conta" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="When cliente solicitar a retirada de 200 reais" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="Then o sistema n\u00E3o aprova a retirada" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="And o saldo atual \u00E9 de 100 reais" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="Scenario: Nega\u00E7\u00E3o para retirar" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase classname="Scenario: Nega\u00E7\u00E3o para retirar" name="Scenario: Nega\u00E7\u00E3o para retirar" time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="Given Eu sou um paciente nao cadastrado." time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="When Eu entro com dados validos." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="Then Eu recebo uma mensagem de sucesso." time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="Scenario: Cadastro com Sucesso." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Erro." name="Given Eu sou um paciente nao cadastrado." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Erro." name="When Eu entro com dados incorretos." time="0"/>
+  <testcase classname="Scenario: Cadastro com Erro." name="Then Eu recebo uma mensagem de alerta." time="0"/>
+  <testcase classname="Scenario: Cadastro com Erro." name="Scenario: Cadastro com Erro." time="0.001"/>
+  <testcase classname="Scenario: Cadastro Repetido." name="Given Eu sou um paciente cadastrado." time="0"/>
+  <testcase classname="Scenario: Cadastro Repetido." name="When Eu entro com dados registrados." time="0"/>
+  <testcase classname="Scenario: Cadastro Repetido." name="Then Eu recebo uma mensagem de alerta informando que ja tenho acesso." time="0"/>
+  <testcase classname="Scenario: Cadastro Repetido." name="Scenario: Cadastro Repetido." time="0"/>
+  <testcase classname="Scenario: Alteracao de dados." name="Given Eu sou um paciente cadastrado." time="0"/>
+  <testcase classname="Scenario: Alteracao de dados." name="When Eu entro com dados novos." time="0"/>
+  <testcase classname="Scenario: Alteracao de dados." name="Then Eu recebo uma mensagem de sucesso informando que os dados foram alterados." time="0"/>
+  <testcase classname="Scenario: Alteracao de dados." name="Scenario: Alteracao de dados." time="0.001"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Given Eu sou um paciente cadastrado." time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="When Eu entro na tela de informacoes." time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Then Eu eh exibido uma tela com minhas informacoes" time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Scenario: Consulta de Informacoes do Cadastro" time="0"/>
 </testsuite>

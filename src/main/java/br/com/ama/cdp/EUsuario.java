@@ -1,22 +1,16 @@
 package br.com.ama.cdp;
 
-
 public enum EUsuario {
-	AGENTESAUDE(1,"Agente de Saúde"),
-	PACIENTE(2,"Paciente");
-	
-	private final int codigo;
-	private final String descricao;
-	
-	EUsuario(int _valorOpcao,String _descricao){
+    AGENTESAUDE(1),
+    PACIENTE(2);
+
+    private final int codigo;
+
+    EUsuario(int _valorOpcao) {
         this.codigo = _valorOpcao;
-        this.descricao = _descricao; 
     }
-    public int getCodigo(){
+
+    public int getCodigo() {
         return codigo;
-    }
-    
-    public String getDescricao(){
-        return descricao;
     }
 }
