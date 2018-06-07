@@ -1,0 +1,14 @@
+language: java
+
+jdk:
+ - oraclejdk8 
+
+branches:
+  only:
+    - master
+    - dev
+    - devTarcisio
+    - devLucas
+
+notifications:
+slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
