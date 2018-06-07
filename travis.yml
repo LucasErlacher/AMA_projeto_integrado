@@ -1,13 +1,14 @@
-sudo: required
-dist: precise
-
 language: java
+
 jdk:
-  - oraclejdk7
-  - oraclejdk8
-  
-before:
-	mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-	
-	
-	
+ - oraclejdk8 
+
+branches:
+  only:
+    - master
+    - dev
+    - devTarcisio
+    - devLucas
+
+notifications:
+slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
