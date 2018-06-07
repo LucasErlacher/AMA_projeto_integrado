@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="20" failures="0" name="br.com.ama.testes.BDDTest" time="10.665" errors="0" skipped="0">
+<testsuite tests="20" failures="0" name="br.com.ama.testes.BDDTest" time="9.815" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -61,11 +61,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Scenario: Cadastro com Sucesso." name="Given Eu sou um paciente nao cadastrado." time="0"/>
-  <testcase classname="Scenario: Cadastro com Sucesso." name="When Eu entro com dados validos." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="Given Eu sou um paciente nao cadastrado." time="0.002"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="When Eu entro com dados validos." time="0"/>
   <testcase classname="Scenario: Cadastro com Sucesso." name="Then Eu recebo uma mensagem de sucesso." time="0"/>
   <testcase classname="Scenario: Cadastro com Sucesso." name="Scenario: Cadastro com Sucesso." time="0.001"/>
-  <testcase classname="Scenario: Cadastro com Erro." name="Given Eu sou um paciente nao cadastrado." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Erro." name="Given Eu sou um paciente nao cadastrado." time="0"/>
   <testcase classname="Scenario: Cadastro com Erro." name="When Eu entro com dados incorretos." time="0"/>
   <testcase classname="Scenario: Cadastro com Erro." name="Then Eu recebo uma mensagem de alerta." time="0"/>
   <testcase classname="Scenario: Cadastro com Erro." name="Scenario: Cadastro com Erro." time="0.001"/>
@@ -73,12 +73,12 @@
   <testcase classname="Scenario: Cadastro Repetido." name="When Eu entro com dados registrados." time="0"/>
   <testcase classname="Scenario: Cadastro Repetido." name="Then Eu recebo uma mensagem de alerta informando que ja tenho acesso." time="0"/>
   <testcase classname="Scenario: Cadastro Repetido." name="Scenario: Cadastro Repetido." time="0"/>
-  <testcase classname="Scenario: Alteracao de dados." name="Given Eu sou um paciente cadastrado." time="0"/>
+  <testcase classname="Scenario: Alteracao de dados." name="Given Eu sou um paciente cadastrado." time="0.001"/>
   <testcase classname="Scenario: Alteracao de dados." name="When Eu entro com dados novos." time="0"/>
   <testcase classname="Scenario: Alteracao de dados." name="Then Eu recebo uma mensagem de sucesso informando que os dados foram alterados." time="0"/>
-  <testcase classname="Scenario: Alteracao de dados." name="Scenario: Alteracao de dados." time="0.001"/>
+  <testcase classname="Scenario: Alteracao de dados." name="Scenario: Alteracao de dados." time="0"/>
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Given Eu sou um paciente cadastrado." time="0"/>
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="When Eu entro na tela de informacoes." time="0"/>
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Then Eu eh exibido uma tela com minhas informacoes" time="0"/>
-  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Scenario: Consulta de Informacoes do Cadastro" time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Scenario: Consulta de Informacoes do Cadastro" time="0.001"/>
 </testsuite>

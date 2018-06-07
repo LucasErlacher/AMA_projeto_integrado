@@ -14,10 +14,10 @@ public class Paciente {
     //Dados Pessoais
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
-    
+
     private String nome;
     private String email;
-    private int enum_sexo; 
+    private int enum_sexo;
 
     //???????
     private int enum_usuario;
@@ -59,7 +59,7 @@ public class Paciente {
     }
 
     public String getCpf() {
-        return cpf!=null? cpf : "null";
+        return cpf != null ? cpf : "null";
     }
 
     public void setCpf(String _cpf) {
@@ -90,19 +90,20 @@ public class Paciente {
         this.email = _email;
     }
 
-    public int getTipoUsuario() {
-        return this.enum_usuario;
+    public int getEnum_sexo() {
+        return enum_sexo;
     }
 
-    public void setTipoUsuario(int _enum_usuario) {
-        this.enum_usuario = _enum_usuario;
+    public void setEnum_sexo(int enum_sexo) {
+        this.enum_sexo = enum_sexo;
     }
 
-    public int getTipoSexo() {
-        return this.enum_sexo;
+    public int getEnum_usuario() {
+        return enum_usuario;
     }
 
-    public void setTipoSexo(int _enum_sexo) {
-        this.enum_sexo = _enum_sexo;
+    public void setEnum_usuario(int enum_usuario) {
+        this.enum_usuario = enum_usuario;
     }
+
 }

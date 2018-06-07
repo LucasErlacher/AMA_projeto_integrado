@@ -20,6 +20,7 @@ public enum ESexo {
                 return es;
             }
         }
-        throw new IllegalArgumentException("Enum invalido: " + cod);
+       // throw new IllegalArgumentException("Enum invalido: " + cod);
+       return ESexo.MASCULINO ;
     }
 }

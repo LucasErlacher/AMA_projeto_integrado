@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import org.postgresql.util.PSQLException;
 
 public class AplPaciente {
 
@@ -25,15 +24,13 @@ public class AplPaciente {
                 validaPaciente(_paciente);
                  return pacienteDAO.insert(_paciente);            
             } catch (Exception e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }        
         return 0;        
     }
 
-
 public Paciente consultarPacienteCPF(Paciente _paciente) {
-        System.out.println("Entrou no metodo da aplicacao e o CPF = " + _paciente.getCpf());
         Paciente pacientePeloCPF = pacienteDAO.getByCPF(_paciente.getCpf());
         return pacientePeloCPF;
     }
@@ -52,11 +49,11 @@ public Paciente consultarPacienteCPF(Paciente _paciente) {
         System.out.println("Seu nome eh: " + paciente.getNome());
         System.out.println("Seu email eh: " + paciente.getEmail());
         System.out.println("Seu cpf eh: " + paciente.getCpf());
-        System.out.println("Sua senhaeh: " + paciente.getSenha());        
         Date date = paciente.getDataNascimento();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String full = sdf.format(date);
         System.out.println("Sua data de nascimento eh: " + full);
+        System.out.println("Sexo: " + ESexo.getByCodigo(paciente.getEnum_sexo()).toString());
     }
 
     public boolean validaPaciente(Paciente _paciente) {
@@ -77,7 +74,7 @@ public Paciente consultarPacienteCPF(Paciente _paciente) {
         }        
         ArrayList<ESexo> sexos = new ArrayList<>();
         sexos.addAll(Arrays.asList(ESexo.values()));
-        if (!sexos.contains(ESexo.getByCodigo(_paciente.getTipoSexo()))) {
+        if (!sexos.contains(ESexo.getByCodigo(_paciente.getEnum_sexo()))) {
             throw new DadoInvalidoException("O campo Sexo está inválido.");
         }
         return true;

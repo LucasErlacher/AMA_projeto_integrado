@@ -33,20 +33,19 @@ public class CadastroPacienteTest {
         Random gerador = new Random();       
         String dadoNovo = ""+ gerador.nextInt(90000);
         this.paciente.setCpf(dadoNovo);        
-        String target = "1997-04-12";
+        String target = "2000-01-01";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date result = df.parse(target);
         this.paciente.setDataNascimento(result);
-        this.paciente.setEmail(dadoNovo + "@gmail.com");
+        this.paciente.setEmail("userTest" + dadoNovo+"@xmail.com");
         this.paciente.setSenha("admin");
-        this.paciente.setNome("Rita Carneiro");
-        this.paciente.setTipoUsuario(1);
-        this.paciente.setTipoSexo(1);
+        this.paciente.setNome("User Created by Teste" + dadoNovo);
+        this.paciente.setEnum_sexo(gerador.nextInt(1)+1);
+        this.paciente.setEnum_usuario(1);
     }
 
     @When("^Eu entro com dados incorretos\\.$")
     public void euEntroComDadosIncorretos() throws Throwable {
-
     }
 
     @When("^Eu entro com dados registrados\\.$")
@@ -56,7 +55,7 @@ public class CadastroPacienteTest {
 
     @When("^Eu entro com dados novos\\.$")
     public void euEntroComDadosNovos() throws Throwable {
-        paciente.setEmail("cidsdswsio@hot.gooogle.com");
+        paciente.setEmail("testChanged@xmail.com");
         paciente.setSenha("admin1234");
     }
 

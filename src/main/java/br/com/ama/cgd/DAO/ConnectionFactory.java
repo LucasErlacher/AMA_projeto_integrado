@@ -10,15 +10,17 @@ public class ConnectionFactory {
     private static final String USER = "sxkmvllg";
     private static final String PASS = "RgEYHVSVFZkV08cXHGOymH9wO6HOllmP";
 
-    public Connection getConnection() {
+    public Connection getConnection()  {
         Connection con = null;
         try {
             //            String URL = "jdbc:postgresql://localhost:5432/AMA";
             //            String USER = "postgres";
             //            String PASS = "admin";
+            Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(URL, USER, PASS);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.print("Erro na criacao de conexao: " + e.getMessage());
+            e.printStackTrace();
         }
         return con;
     }
