@@ -1,6 +1,8 @@
 package br.com.ama.cdp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Paciente {
@@ -21,6 +23,8 @@ public class Paciente {
 
     //???????
     private int enum_usuario;
+    
+    private List<Consulta> consultas;
 
     //Construtor
     public Paciente(int _id, String _cpf, String _senha, Date _dataNascimento,
@@ -34,11 +38,11 @@ public class Paciente {
         this.email = _email;
         this.enum_usuario = _enum_usuario;
         this.enum_sexo = _enum_sexo;
+        this.consultas = new ArrayList<>();
 
     }
 
     public Paciente() {
-
     }
 
     //Métodos
@@ -94,16 +98,16 @@ public class Paciente {
         return enum_sexo;
     }
 
-    public void setEnum_sexo(int enum_sexo) {
-        this.enum_sexo = enum_sexo;
+    public void setEnum_sexo(int _enum_sexo) {
+        this.enum_sexo = _enum_sexo;
     }
 
     public int getEnum_usuario() {
         return enum_usuario;
     }
 
-    public void setEnum_usuario(int enum_usuario) {
-        this.enum_usuario = enum_usuario;
+    public void setEnum_usuario(int _enum_usuario) {
+        this.enum_usuario = _enum_usuario;
     }
 
 }

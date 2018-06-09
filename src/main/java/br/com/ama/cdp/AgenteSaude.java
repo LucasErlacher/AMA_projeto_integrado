@@ -6,7 +6,6 @@ import java.util.Date;
 public class AgenteSaude extends Paciente {
 
     private String inscricao;
-    //private Estado estadoInsricao;
 
     //Constutor
     public AgenteSaude(int _id, String _cpf, String _senha, Date _dataNascimento,

@@ -1,8 +1,6 @@
 
 package br.com.amawebinterface.controllers;
 
-import br.com.ama.cdp.Paciente;
-import br.com.ama.cgt.AplPaciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -15,24 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class PacienteController {
-    
-    @RequestMapping(value = "/Paciente/EfetuarLoginPaciente")
-    public String LoginPaciente() {
-        return "Paciente/LoginPaciente";
-    }
+public class DefaultController {
 
-    @RequestMapping(value = "/Paciente/CadastrarPaciente", method = RequestMethod.GET)
-    public String CadastroPaciente() {
-        return "Paciente/CadastrarPaciente";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "index";
     }
-    
-//    @RequestMapping(value = "/Paciente/AdicionarPaciente", method = RequestMethod.POST)
-//    public String adicionarPaciente(Paciente _paciente) {
-//        AplPaciente aplPaciente = new AplPaciente();
-//                aplPaciente.cadastrarPaciente(_paciente);
-//        return "index";
-//    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

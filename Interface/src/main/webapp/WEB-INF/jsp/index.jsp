@@ -5,14 +5,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>AMA</title>
-        <link rel="stylesheet" type="text/css" href="${cp}/resources/css/cadastroPaciente.css" />
-        <script src="${cp}/resources/js/js.js"></script>
+        <link rel="stylesheet"  href="${cp}/resources/css/index.css"/>
+        <link rel="stylesheet"  href="${cp}/resources/css/Bootstrap/bootstrap.min.css"/>
     </head>
     <body>
-        <h4>Bem vindo ao Projeto AMA</h4>
-       Area do Paciente <a href="LoginPaciente">Clique aqui</a><br>
-       Area do Agente de Saude <a href="#">Clique aqui</a>        
-    </body>
+        <div class="container"> 
+            <hr class="prettyline">
+            <br>
+            <center>
+                <h2 class="titulo-ama"><b>Seja bem-vindo ao AMA!</b></h2><br>
+                <a class="btn btn-primary btn-md" href="Paciente/EfetuarLoginPaciente">Área do Paciente</a><br><br>                     
+                <a class="btn btn-primary btn-md" href="#">Área do Agente de Saúde</a><br><br>                     
+            </center>
+            <br>
+        </div>        
+        <script src="${cp}/resources/js/jquery-2.2.4.js"></script>
+        <script src="${cp}/resources/js/Bootstrap/bootstrap.min.js" /></script>
+</body>
 </html>
