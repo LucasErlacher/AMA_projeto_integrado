@@ -18,38 +18,35 @@ public class HorarioAtendimentoDAO {
         int idDiaSemana = 0;
 
         //Consulta qual o ID do dia da semana no horário de atendimento
-        String queryConsultaIdDiaSemana = "select iddiasemana from diasemana where descricao like '?'";
+        idDiaSemana = new DiaSemanaDAO().getId(ha.getDiaSemana());
 
-        try {
-            PreparedStatement ps = conexao.prepareStatement(queryConsultaIdDiaSemana);
-           // ps.setString(1,ha.getDiaSemana());
+        //Query idhorarioatendimento	horainicio	horafim	intervalo	iddiasemana
+        String query = "insert into horarioatendimento (idhorarioatendimento, horainicio, horafim, intervalo, iddiasemana) " +
+                "values (default, ?, ?, ?, ?)";
 
-            //Tabela contendo o dia da semana
-            ResultSet rs = ps.executeQuery();
-            rs.next(); //Primeira linha
-            idDiaSemana = rs.getInt("iddiasemana"); //Pegando o id do result set
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        //Insere o horario de atendimento na tabela
-        String query = "insert into horarioatendimento (horainicio, horafim, intervalo, iddiasemana) values (?, ?, ?, ?)";
-
-        try {
+        try{
             PreparedStatement ps = conexao.prepareStatement(query);
 
-//            ps.setString(1,ha.getHoraInicio());
-//            ps.setString(2,ha.getHoraFinal());
-//            ps.setString(3,ha.getIntervalo());
-            ps.setInt(4,idDiaSemana);
+            String intervalo = ha.getIntervalo().getValue();
+            String[] intervalo_token = intervalo.split(" ");
+            intervalo = intervalo_token[6] + ":" + intervalo_token[8] + ":" + intervalo_token[10].split(".")[0];
+
+            ps.setString(1, ha.getHoraInicio().toString());
+            ps.setString(2, ha.getHoraFinal().toString());
+            ps.setString(3, intervalo);
+            ps.setString(4, ha.getDiaSemana());
 
             ps.executeUpdate();
 
-            //Fechando conexão
+            ps.close();
             conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getIdHorarioAtendimento(HorarioAtendimento ha){
+        return 0;
     }
 
     public List<HorarioAtendimento> getAll(){

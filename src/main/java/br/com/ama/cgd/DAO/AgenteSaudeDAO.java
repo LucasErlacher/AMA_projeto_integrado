@@ -67,10 +67,40 @@ public class AgenteSaudeDAO {
     public void cadastraHorarioAtendimento(AgenteSaude agenteSaude, HorarioAtendimento horarioAtendimento){
         conexao = new ConnectionFactory().getConnection();
 
-        String query = "";
+        //Lista com todos horários do banco de dados;
+        ArrayList<HorarioAtendimento> list_horarios = (ArrayList<HorarioAtendimento>) new HorarioAtendimentoDAO().getAll();
 
-        try{
+        boolean exists = false;
+        int id_ha = 0;
+        int id_as = agenteSaude.getId();
+
+        HorarioAtendimentoDAO haDAO = new HorarioAtendimentoDAO();
+
+        //Varre a lista de horários em busca de um horário igual
+        for (HorarioAtendimento ha : list_horarios) {
+            if(horarioAtendimento.compareTo(ha) == 0){
+                id_ha = haDAO.getIdHorarioAtendimento(ha);
+                exists = true;
+                break;
+            }
+        }
+
+        //Se não existe um horário igual, cria e pega o ID
+        if(!exists){
+            haDAO.insert(horarioAtendimento);
+            id_ha = haDAO.getIdHorarioAtendimento(horarioAtendimento);
+        }
+
+        //Insere os dados na tabela
+        String query = "insert into agentesaude_horarioatendimento " +
+                       "(id_agentesaude_horarioatendimento, idagentesaude, idhorarioatendimento) " +
+                       "values (default, ?, ?)";
+
+        try {
             PreparedStatement ps = conexao.prepareStatement(query);
+            ps.setInt(1, id_as);
+            ps.setInt(2, id_ha);
+            ps.executeUpdate();
 
             ps.close();
             conexao.close();
@@ -78,6 +108,7 @@ public class AgenteSaudeDAO {
             e.printStackTrace();
         }
 
+        return;
     }
 
     public List<HorarioAtendimento> getHorarioAtendimento(AgenteSaude agenteSaude){
@@ -100,12 +131,12 @@ public class AgenteSaudeDAO {
                 "inner join horarioatendimento ha on (asha.idhorarioatendimento = ha.idhorarioatendimento) " +
                 "inner join diasemana ds on (ha.iddiasemana = ds.iddiasemana) " +
                 "inner join paciente pc on (asha.idagentesaude = pc.idpaciente) " +
-                "where pc.\"cpf\" like '" + cpf + "'";
+                "where pc.\"cpf\" like ? ";
 
         try {
             //Preparação da Query
             PreparedStatement ps = conexao.prepareStatement(query);
-            //ps.setString(1, cpf); -> Query está dando problema
+            ps.setString(1, cpf);// -> Query está dando problema
 
             //Resultado da execução da query
             ResultSet rs = ps.executeQuery();

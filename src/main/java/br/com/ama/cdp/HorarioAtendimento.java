@@ -5,10 +5,11 @@
  */
 package br.com.ama.cdp;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import org.joda.time.LocalTime;
 import org.postgresql.util.PGInterval;
 
-public class HorarioAtendimento {
+public class HorarioAtendimento implements Comparable<HorarioAtendimento> {
     private LocalTime horaInicio;
     private LocalTime horaFinal;
     private PGInterval intervalo;
@@ -56,5 +57,21 @@ public class HorarioAtendimento {
 
     public LocalTime getHoraFinal() {
         return horaFinal;
+    }
+
+    public PGInterval getIntervalo(){
+        return intervalo;
+    }
+    @Override
+    public int compareTo(HorarioAtendimento ha) {
+        //horaInicio, horaFinal, intervalo,diaSemana;
+
+        if(ha.getDiaSemana().equals(this.diaSemana) &&
+           ha.getHoraFinal().isEqual(this.horaFinal) &&
+           ha.getHoraInicio().isEqual(this.horaInicio)){
+            return 0;
+        }
+
+        return -1;
     }
 }
