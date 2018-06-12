@@ -1,10 +1,10 @@
 package br.com.ama.cgd.DAO;
 
 import br.com.ama.cdp.HorarioAtendimento;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.joda.time.format.DateTimeFormat;
+import org.postgresql.util.PGInterval;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,26 +15,22 @@ public class HorarioAtendimentoDAO {
     public void insert(HorarioAtendimento ha){
         this.conexao = new ConnectionFactory().getConnection();
 
-        int idDiaSemana = 0;
-
-        //Consulta qual o ID do dia da semana no horário de atendimento
-        idDiaSemana = new DiaSemanaDAO().getId(ha.getDiaSemana());
-
         //Query idhorarioatendimento	horainicio	horafim	intervalo	iddiasemana
         String query = "insert into horarioatendimento (idhorarioatendimento, horainicio, horafim, intervalo, iddiasemana) " +
-                "values (default, ?, ?, ?, ?)";
+                       "values (default, ?, ?, ?, ?)";
 
         try{
             PreparedStatement ps = conexao.prepareStatement(query);
 
-            String intervalo = ha.getIntervalo().getValue();
-            String[] intervalo_token = intervalo.split(" ");
-            intervalo = intervalo_token[6] + ":" + intervalo_token[8] + ":" + intervalo_token[10].split(".")[0];
+            Time horainicio = new Time(ha.getHoraInicioMilisseconds());
+            Time horafinal = new Time(ha.getHoraFinalMilisseconds());
+            PGInterval intervalo = ha.getIntervalo();
+            int idDiaSemana = new DiaSemanaDAO().getId(ha.getDiaSemana());
 
-            ps.setString(1, ha.getHoraInicio().toString());
-            ps.setString(2, ha.getHoraFinal().toString());
-            ps.setString(3, intervalo);
-            ps.setString(4, ha.getDiaSemana());
+            ps.setTime(1,horainicio);
+            ps.setTime(2,horafinal);
+            ps.setObject(3,intervalo);
+            ps.setInt(4,idDiaSemana);
 
             ps.executeUpdate();
 
@@ -46,7 +42,34 @@ public class HorarioAtendimentoDAO {
     }
 
     public int getIdHorarioAtendimento(HorarioAtendimento ha){
-        return 0;
+        conexao = new ConnectionFactory().getConnection();
+
+        String query =  "select idhorarioatendimento from horarioatendimento where\n" +
+                        "horainicio = '12:30:00' and\n" +
+                        "horafim = '18:30:00' and\n" +
+                        "intervalo = '00:30:00' and\n" +
+                        "iddiasemana = 2";
+
+        int id = -1;
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+
+            id = rs.getInt(0);
+
+            rs.close();
+            ps.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
     }
 
     public List<HorarioAtendimento> getAll(){

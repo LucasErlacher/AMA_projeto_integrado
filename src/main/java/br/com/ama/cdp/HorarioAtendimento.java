@@ -62,6 +62,32 @@ public class HorarioAtendimento implements Comparable<HorarioAtendimento> {
     public PGInterval getIntervalo(){
         return intervalo;
     }
+
+    public long getHoraInicioMilisseconds(){
+        long hora = 0;
+        hora += horaInicio.getHourOfDay() * 3600000;
+        hora += horaInicio.getMinuteOfHour() * 60000;
+        hora += horaInicio.getSecondOfMinute() * 1000;
+        return hora;
+    }
+
+    public long getHoraFinalMilisseconds(){
+        long hora = 0;
+        hora += horaFinal.getHourOfDay() * 3600000;
+        hora += horaFinal.getMinuteOfHour() * 60000;
+        hora += horaFinal.getSecondOfMinute() * 1000;
+        return hora;
+    }
+
+    public long getIntervaloMilisseconds(){
+        long hora = 0;
+
+        hora += intervalo.getHours() * 3600000;
+        hora += intervalo.getMinutes() * 60000;
+        hora += intervalo.getSeconds() * 1000;
+        return hora;
+    }
+
     @Override
     public int compareTo(HorarioAtendimento ha) {
         //horaInicio, horaFinal, intervalo,diaSemana;

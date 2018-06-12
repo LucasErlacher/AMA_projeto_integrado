@@ -62,6 +62,10 @@ public class AgenteSaudeDAO {
 
     }
 
+    public void getAll(){
+
+    }
+
     //--------------------------- Funções do Caso de Uso do Agente de Saúde ---------------------------------
 
     public void cadastraHorarioAtendimento(AgenteSaude agenteSaude, HorarioAtendimento horarioAtendimento){
@@ -111,7 +115,58 @@ public class AgenteSaudeDAO {
         return;
     }
 
-    public List<HorarioAtendimento> getHorarioAtendimento(AgenteSaude agenteSaude){
+    public void alteraHorarioAtendimento(AgenteSaude agenteSaude, HorarioAtendimento horarioAtendimentoAntigo,
+                                         HorarioAtendimento horarioAtendimentoNovo) throws RuntimeException{
+        /*
+        * Pega Horarios de Atendimento do Agente de Saúde.
+        * Procura o horário de atendimento que é do mesmo dia da semana que foi passado no horário de atendimento;
+        * */
+        List<HorarioAtendimento> lst_ha = consultaHorarioAtendimento(agenteSaude);
+
+        boolean exists = false;
+
+        for (HorarioAtendimento ha : lst_ha) {
+            if(ha.getDiaSemana().equals(horarioAtendimentoNovo.getDiaSemana())){
+                exists = true;
+                break;
+            }
+        }
+
+        if(!exists) {
+            excluiHorarioAtendimento(agenteSaude, horarioAtendimentoAntigo);
+
+            cadastraHorarioAtendimento(agenteSaude, horarioAtendimentoNovo);
+        }else{
+            throw new RuntimeException("Você já tem um horário neste dia da semana");
+        }
+    }
+
+    public void excluiHorarioAtendimento(AgenteSaude agenteSaude, HorarioAtendimento horarioAtendimento){
+        conexao = new ConnectionFactory().getConnection();
+
+        String query = "delete from agentesaude_horarioatendimento where idagentesaude = ? and idhorarioatendimento = ?";
+
+        HorarioAtendimentoDAO haDAO = new HorarioAtendimentoDAO();
+
+        int id_as = agenteSaude.getId();
+        int id_ha = haDAO.getIdHorarioAtendimento(horarioAtendimento);
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(query);
+
+            ps.setInt(1, id_as);
+            ps.setInt(2, id_ha);
+
+            ps.executeUpdate();
+
+            ps.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<HorarioAtendimento> consultaHorarioAtendimento(AgenteSaude agenteSaude){
         //Resultado
         List<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
 

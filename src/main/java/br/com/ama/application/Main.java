@@ -34,22 +34,17 @@ public class Main {
                 EUsuario.AGENTESAUDE, ESexo.MASCULINO, "87655431");
 
         //ArrayList<HorarioAtendimento> al = (ArrayList<HorarioAtendimento>) new HorarioAtendimentoDAO().getAll();
-        ArrayList<HorarioAtendimento> al = (ArrayList<HorarioAtendimento>) new AgenteSaudeDAO().getHorarioAtendimento(as);
+        ArrayList<HorarioAtendimento> al = (ArrayList<HorarioAtendimento>) new AgenteSaudeDAO().consultaHorarioAtendimento(as);
 
         HorarioAtendimento haTeste = new HorarioAtendimento();
-        haTeste.setHoraInicio("12:30:00");
-        haTeste.setHoraFinal("18:30:00");
-        haTeste.setDiaSemana("Segunda-feira");
-        haTeste.setIntervalo("00:30:00");
-        al.add(haTeste);
+
+        HorarioAtendimentoDAO haDAO = new HorarioAtendimentoDAO();
+        int id = haDAO.getIdHorarioAtendimento(al.get(0));
+
+        System.out.println("Este é o ID:    " + id);
 
 
-        System.out.println(haTeste.getIntervalo().getValue());
-//        for (HorarioAtendimento ha:
-//             al) {
-//            System.out.println(ha.getHoraInicio().toString() + " " + ha.getHoraFinal().toString() + " " + ha.getDiaSemana());
-//        }
-//
-//        System.out.println(al.get(0).compareTo(al.get(1)) + " 0 - é igual");
+
+
     }
 }
