@@ -20,5 +20,4 @@ notifications:
   slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
 
 script:
-  - echo "teste"
   - sonar-scanner
