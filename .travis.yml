@@ -7,7 +7,7 @@ jdk:
   sonarcloud:
     organization: "lucaserlacher-github"
     token:
-      secure: "b2e05f503b530adf0b8c9a868b9ec75d4d091487"
+      secure: "$sonnar_key"
 
 branches:
   only:
