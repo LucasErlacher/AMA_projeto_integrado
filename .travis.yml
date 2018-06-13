@@ -1,12 +1,12 @@
 language: java
-
+dist: trusty
 jdk:
  - oraclejdk8
 addons:
- sonarcloud:
-  organization: "lucaserlacher-github"
-   token:
-    secure: $sonnar_key
+  sonarcloud:
+    organization: "lucaserlacher-github"
+    token:
+      secure: $sonnar_key
 
 notifications:
   slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
