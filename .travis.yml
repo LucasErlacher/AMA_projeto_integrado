@@ -12,3 +12,6 @@ branches:
 
 notifications:
   slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+
+script:
+  - sonar-scanner
