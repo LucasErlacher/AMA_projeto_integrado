@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="20" failures="0" name="br.com.ama.testes.BDDTest" time="10.081" errors="0" skipped="0">
+<testsuite tests="40" failures="0" name="br.com.ama.testes.BDDTest" time="20.011" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -61,7 +61,27 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Scenario: Cadastro com Sucesso." name="Given Eu sou um paciente nao cadastrado." time="0.001"/>
+  <testcase classname="Scenario: Cadastro com Sucesso" name="Given Um endereco nao cadastrado" time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso" name="When Entro com dados validos" time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso" name="Then Recebo uma mensagem de sucesso" time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso" name="Scenario: Cadastro com Sucesso" time="0"/>
+  <testcase classname="Scenario: Cadastro com erro" name="Given Um endereco nao cadastrado" time="0"/>
+  <testcase classname="Scenario: Cadastro com erro" name="When Entro com dados invalidos" time="0"/>
+  <testcase classname="Scenario: Cadastro com erro" name="Then Recebo uma mensagem de erro nos dados" time="0"/>
+  <testcase classname="Scenario: Cadastro com erro" name="Scenario: Cadastro com erro" time="0"/>
+  <testcase classname="Scenario: Alteracao de dados" name="Given Um endereco cadastrado" time="0"/>
+  <testcase classname="Scenario: Alteracao de dados" name="When Entro com dados novos" time="0"/>
+  <testcase classname="Scenario: Alteracao de dados" name="Then Recebo uma mensagem informando que os dados foram alterados" time="0"/>
+  <testcase classname="Scenario: Alteracao de dados" name="Scenario: Alteracao de dados" time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes de endereco" name="Given Um endereco cadastrado" time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes de endereco" name="When Entro na tela de informacoes" time="0.001"/>
+  <testcase classname="Scenario: Consulta de Informacoes de endereco" name="Then E exibido as informacoes do endereco" time="0"/>
+  <testcase classname="Scenario: Consulta de Informacoes de endereco" name="Scenario: Consulta de Informacoes de endereco" time="0"/>
+  <testcase classname="Scenario: Excluir endereco" name="Given Um endereco cadastrado" time="0"/>
+  <testcase classname="Scenario: Excluir endereco" name="When Seleciono a opcao para excluir" time="0"/>
+  <testcase classname="Scenario: Excluir endereco" name="Then Recebo uma mensagem informando que o endereco foi excluido" time="0"/>
+  <testcase classname="Scenario: Excluir endereco" name="Scenario: Excluir endereco" time="0"/>
+  <testcase classname="Scenario: Cadastro com Sucesso." name="Given Eu sou um paciente nao cadastrado." time="0"/>
   <testcase classname="Scenario: Cadastro com Sucesso." name="When Eu entro com dados validos." time="0"/>
   <testcase classname="Scenario: Cadastro com Sucesso." name="Then Eu recebo uma mensagem de sucesso." time="0"/>
   <testcase classname="Scenario: Cadastro com Sucesso." name="Scenario: Cadastro com Sucesso." time="0.001"/>
@@ -72,7 +92,7 @@
   <testcase classname="Scenario: Cadastro Repetido." name="Given Eu sou um paciente cadastrado." time="0"/>
   <testcase classname="Scenario: Cadastro Repetido." name="When Eu entro com dados registrados." time="0"/>
   <testcase classname="Scenario: Cadastro Repetido." name="Then Eu recebo uma mensagem de alerta informando que ja tenho acesso." time="0"/>
-  <testcase classname="Scenario: Cadastro Repetido." name="Scenario: Cadastro Repetido." time="0.001"/>
+  <testcase classname="Scenario: Cadastro Repetido." name="Scenario: Cadastro Repetido." time="0"/>
   <testcase classname="Scenario: Alteracao de dados." name="Given Eu sou um paciente cadastrado." time="0"/>
   <testcase classname="Scenario: Alteracao de dados." name="When Eu entro com dados novos." time="0"/>
   <testcase classname="Scenario: Alteracao de dados." name="Then Eu recebo uma mensagem de sucesso informando que os dados foram alterados." time="0"/>
@@ -80,5 +100,5 @@
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Given Eu sou um paciente cadastrado." time="0"/>
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="When Eu entro na tela de informacoes." time="0"/>
   <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Then Eu eh exibido uma tela com minhas informacoes" time="0"/>
-  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Scenario: Consulta de Informacoes do Cadastro" time="0.001"/>
+  <testcase classname="Scenario: Consulta de Informacoes do Cadastro" name="Scenario: Consulta de Informacoes do Cadastro" time="0"/>
 </testsuite>

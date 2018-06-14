@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.ama.testes.BDDTest
 -------------------------------------------------------------------------------
-Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.066 sec
+Tests run: 40, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.993 sec

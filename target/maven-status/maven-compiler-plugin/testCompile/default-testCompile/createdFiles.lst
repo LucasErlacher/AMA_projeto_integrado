@@ -1,2 +1,3 @@
-br\com\ama\testes\BDDTest.class
 br\com\ama\testes\CadastroPacienteTest.class
+br\com\ama\testes\CadastroEnderecoTest.class
+br\com\ama\testes\BDDTest.class

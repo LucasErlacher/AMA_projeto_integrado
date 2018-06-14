@@ -12,79 +12,85 @@ public class Endereco {
     private String numero;
 
     //Construtor
-    public Endereco(int _id, String _cep, String _logradouro, String _bairro, String _cidade, String _estado){
-        this.idendereco=_id;
-        this.cep=_cep;
-        this.logradouro=_logradouro;
-        this.bairro=_bairro;
-        this.cidade=_cidade;
-        this.estado=_estado;
-    }
     
-    public Endereco(){
-    }
-    //Métodos
-    public int getId() {
-        return idendereco;
-    }
+    
+    
+    public Endereco() {}
+    
+    public Endereco(String cep, String logradouro, String bairro, String cidade, String estado, String complemento, String numero) {
+		super();
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.complemento = complemento;
+		this.numero = numero;
+		this.estado = estado;
+	}
 
-    public void setId(int idendereco) {
-        this.idendereco = idendereco;
-    }
+	//Métodos
+	public int getIdendereco() {
+		return idendereco;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public void setIdendereco(int idendereco) {
+		this.idendereco = idendereco;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public String getCep() {
+		return cep;
+	}
 
-    public String getLogradouro() {
-        return logradouro;
-    }
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
+	public String getLogradouro() {
+		return logradouro;
+	}
 
-    public String getBairro() {
-        return bairro;
-    }
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+	public String getBairro() {
+		return bairro;
+	}
 
-    public String getCidade() {
-        return cidade;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+	public String getCidade() {
+		return cidade;
+	}
 
-    public String getEstado() {
-        return estado;
-    }
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	public String getEstado() {
+		return estado;
+	}
 
-    public void setNumero(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    public void setComplemento(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public String getComplemento() {
+		return complemento;
+	}
 
-    public String getNumero() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 
-    public String getComplemento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+    
 }

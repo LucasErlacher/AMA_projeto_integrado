@@ -6,6 +6,24 @@ import java.util.Date;
 public class AgenteSaude extends Paciente {
 
     private String inscricao;
+    private int enum_registro;
+
+    public int getEnum_registro() {
+        return enum_registro;
+    }
+
+    public void setEnum_registro(int enum_registro) {
+        this.enum_registro = enum_registro;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+    private String especialidade;
 
     //Constutor
     public AgenteSaude(int _id, String _cpf, String _senha, Date _dataNascimento,
