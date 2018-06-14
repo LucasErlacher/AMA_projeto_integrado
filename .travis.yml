@@ -15,7 +15,7 @@ deploy:
  app:
   master: amaproject
  on:
-  branch: master, devTarcisio
+  branch: master
 
 script:  
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
