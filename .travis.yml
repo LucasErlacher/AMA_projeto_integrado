@@ -14,7 +14,8 @@ deploy:
   secure: $heroku_key
  app:
   master: amaproject
- on: master
+ on:
+  branch: master, devTarcisio
 
 script:  
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
