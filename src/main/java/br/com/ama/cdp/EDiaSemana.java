@@ -1,26 +1,31 @@
 package br.com.ama.cdp;
 
 public enum EDiaSemana {
-	DOMINGO(1,"Domingo"),
-	SEGUNDA(2,"Segunda-feira"),
-	TERCA(3,"Terça-feira"),
-	QUARTA(4,"Quarta-feira"),
-	QUINTA(5,"Quinta-feira"),
-	SEXTA(6,"Setxa-feira"),
-	SABADO(7,"Sábado");
+	DOMINGO(1),
+	SEGUNDA(2),
+	TERCA(3),
+	QUARTA(4),
+	QUINTA(5),
+	SEXTA(6),
+	SABADO(7);
 	
-	private final int codigo;
-	private final String descricao;
-	
-	EDiaSemana(int _valorCodigo,String _descricao){
-        this.codigo = _valorCodigo;
-        this.descricao = _descricao; 
+ public final int codigo;
+
+    private EDiaSemana(int _valorOpcao) {
+        this.codigo = _valorOpcao;
     }
-    public int getCodigo(){
-        return this.codigo;
+
+    public int getCodigo() {
+        return codigo;
     }
-    
-    public String getDescricao(){
-        return descricao;
+
+    public static EDiaSemana getByCodigo(int cod) {
+        for (EDiaSemana ds : values()) {
+            if (ds.codigo == cod) {
+                return ds;
+            }
+        }
+        throw new IllegalArgumentException("Enum invalido: " + cod);
     }
 }
+

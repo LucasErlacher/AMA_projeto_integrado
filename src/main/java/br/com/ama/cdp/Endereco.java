@@ -2,69 +2,95 @@ package br.com.ama.cdp;
 
 public class Endereco {
 
-    private int id;
+    private int idendereco;
     private String cep;
     private String logradouro;
-    private Bairro bairro;
-    private Cidade cidade;
-    private Estado estado;
+    private String bairro;
+    private String cidade;
+    private String estado;
+    private String complemento;
+    private String numero;
 
     //Construtor
-    public Endereco(int _id, String _cep, String _logradouro, Bairro _bairro, Cidade _cidade, Estado _estado){
-        this.id=_id;
-        this.cep=_cep;
-        this.logradouro=_logradouro;
-        this.bairro=_bairro;
-        this.cidade=_cidade;
-        this.estado=_estado;
-    }
-    //Métodos
-    public int getId() {
-        return id;
-    }
+    
+    
+    
+    public Endereco() {}
+    
+    public Endereco(String cep, String logradouro, String bairro, String cidade, String estado, String complemento, String numero) {
+		super();
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.complemento = complemento;
+		this.numero = numero;
+		this.estado = estado;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	//Métodos
+	public int getIdendereco() {
+		return idendereco;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public void setIdendereco(int idendereco) {
+		this.idendereco = idendereco;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public String getCep() {
+		return cep;
+	}
 
-    public String getLogradouro() {
-        return logradouro;
-    }
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
+	public String getLogradouro() {
+		return logradouro;
+	}
 
-    public Bairro getBairro() {
-        return bairro;
-    }
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
 
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
-    }
+	public String getBairro() {
+		return bairro;
+	}
 
-    public Cidade getCidade() {
-        return cidade;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
+	public String getCidade() {
+		return cidade;
+	}
 
-    public Estado getEstado() {
-        return estado;
-    }
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
+	public String getEstado() {
+		return estado;
+	}
 
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+    
 }

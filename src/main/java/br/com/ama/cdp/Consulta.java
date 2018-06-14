@@ -1,11 +1,12 @@
 package br.com.ama.cdp;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Consulta {
-    Paciente paciente;
-    AgenteSaude agenteSaude;
-    LocalAtendimento localAtendimento;
-    String descricao;
-    Calendar inicioAtendimento;
+
+    private Paciente paciente;
+    private AgenteSaude agenteSaude;
+    private LocalAtendimento localAtendimento;    
+    private Date inicioAtendimento;
+
 }

@@ -1,111 +1,193 @@
 package br.com.ama.cgd.DAO;
-
+import br.com.ama.cdp.Endereco;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import br.com.ama.cdp.*;
 
 public class EnderecoDAO {
-
+	//Atributos
     private Connection conexao;
 
+
+    
     public EnderecoDAO() {
-
     }
-
-    public List<Paciente> getAll() {
-
-        List<Paciente> pacientes = new ArrayList<>();
-        this.conexao = new ConnectionFactory().getConnection();
-        try {
-            String query = "select * from paciente";
-            PreparedStatement stmt;
-            stmt = this.conexao.prepareStatement(query);
-            ResultSet rs;
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                Paciente paciente = new Paciente();
-                paciente.setId(Integer.parseInt(rs.getString("id")));
-                paciente.setNome(rs.getString("nome"));
-                paciente.setCpf(rs.getString("cpf"));
-                paciente.setEmail(rs.getString("email"));
-                paciente.setSenha(rs.getString("senha"));
-
-                Calendar data = Calendar.getInstance();
-                data.setTime(rs.getDate("datanascimento"));
-
-                paciente.setDataNascimento(data);
-                pacientes.add(paciente);
-            }
-            this.conexao.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return pacientes;
+    
+    public int getIDCidade(Endereco endereco) throws SQLException {
+    	this.conexao = new ConnectionFactory().getConnection();
+    	String sql = "select c.idcidade from cidade c inner join estado e on e.idestado=c.idestado and e.sigla like '%"+endereco.getEstado()+"%' where c.nome like '%"+endereco.getCidade()+"%'";
+    	int id=0;
+    	
+    	try {
+    		PreparedStatement stmt = this.conexao.prepareStatement(sql);
+    		ResultSet rs = stmt.executeQuery();
+    		rs.next();
+    		id = Integer.parseInt(rs.getString("idcidade"));
+    		rs.close();
+    		stmt.close();
+    	}catch (SQLException e) {
+    		e.printStackTrace();
+    	}finally {this.conexao.close();}
+    	
+    	return id;
     }
-
-    public void delete(Endereco endereco) {
-        this.conexao = new ConnectionFactory().getConnection();
-        try {
-            String query = "delete from endereco where id = ?";
-            PreparedStatement stmt = this.conexao.prepareStatement(query);
-            stmt.setInt(1,endereco.getId());
-            stmt.executeUpdate();
-            this.conexao.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void insert(Endereco endereco) {
+    
+    public List<Endereco> getAll() throws SQLException {
+    	
+    	this.conexao = new ConnectionFactory().getConnection();
+        List<Endereco> enderecos = new ArrayList<>();
         
-    }
-
-    public void update(Paciente paciente) {
-    }
-
-    public Endereco getById(int _id) {
-        Endereco endereco = null;
-        this.conexao = new ConnectionFactory().getConnection();
+        String sql = "select e.idendereco, e.cep, e.logradouro, e.bairro, c.nome as \"cidade\", es.sigla as \"estado\", e.complemento, e.numero "
+ 			   +"from endereco e inner join cidade c on c.idcidade=e.idcidade "
+ 			   +"inner join estado es on es.idestado = c.idestado";
+        
         try {
-            String query = "Select en.ID as IdEndereco,"
-                    + "		en.CEP as CEP,"
-                    + "		en.Logradouro as Logradouro,"
-                    + "		b.id as IdBairro,"
-                    + "		b.nome as Bairro,"
-                    + "		c.id as IdCidade,"
-                    + "		c.Nome as Cidade,"
-                    + "		e.id as IdEstado,"
-                    + "		e.Nome as Estado"
-                    + "		from endereco en"
-                    + "  inner join bairro b on b.id=en.idbairro"
-                    + "  inner join cidade c on c.id=b.idcidade"
-                    + "  inner join estado e on e.id=c.idestado"
-                    + "  where en.id = ? ";
-            PreparedStatement stmt;
-            stmt = this.conexao.prepareStatement(query);
-            stmt.setInt(1, _id);
-            ResultSet rs;
-            rs = stmt.executeQuery();
-            rs.next();
-            int idEndereco = rs.getInt("IdEndereco");
-            String logradouro = rs.getString("Logradouro");
-            String cep = rs.getString("CEP");
-            Bairro bairro = new Bairro(rs.getInt("IdBairro"), rs.getString("Bairro"));
-            Cidade cidade = new Cidade(rs.getInt("IdCidade"), rs.getString("Cidade"));
-            Estado estado = new Estado(rs.getInt("IdEstado"), rs.getString("Estado"));
-            
-            endereco = new Endereco(idEndereco, cep, logradouro, bairro, cidade, estado);
-            this.conexao.close();
+
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Endereco endereco = new Endereco();
+                endereco.setIdendereco(Integer.parseInt(rs.getString("idendereco")));
+                endereco.setCep(rs.getString("cep"));
+                endereco.setLogradouro(rs.getString("logradouro"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setCidade(rs.getString("cidade"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setComplemento(rs.getString("complemento"));
+                endereco.setNumero(rs.getString("numero"));
+                enderecos.add(endereco);
+            }
+            rs.close();
+            stmt.close();
+
         } catch (SQLException e) {
+
             e.printStackTrace();
-        }
+
+        } finally {this.conexao.close();}
+
+        return enderecos;
+    }
+
+    public int delete(Endereco endereco) throws SQLException {
+    	
+    	this.conexao = new ConnectionFactory().getConnection();
+    	int i=0;
+    	
+    	String sql = "delete from endereco where idendereco = ?";
+    	
+        try {
+
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setInt(1,endereco.getIdendereco());
+            i = stmt.executeUpdate();
+            
+            stmt.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        } finally {this.conexao.close();}
+
+        return i;
+    }
+
+    public int insert(Endereco endereco) throws SQLException {
+    	
+    	this.conexao = new ConnectionFactory().getConnection();
+    	int i=0;
+    	String sql = "insert into endereco (idendereco, cep, logradouro, bairro, idcidade, complemento, numero)"
+				+" values "
+				+"(default,?,?,?,?,?,?)";
+    	
+    	try {
+
+			PreparedStatement stmt = this.conexao.prepareStatement(sql);
+			stmt.setString(1, endereco.getCep());
+			stmt.setString(2, endereco.getLogradouro());
+			stmt.setString(3, endereco.getBairro());
+			stmt.setInt(4, this.getIDCidade(endereco));
+			stmt.setString(5, endereco.getComplemento());
+			stmt.setString(6, endereco.getNumero());
+			i = stmt.executeUpdate();
+ 	
+            stmt.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {this.conexao.close();}
+
+    	return i;
+    }
+
+    public int update(int idendereco,String numero, String complemento) throws SQLException {
+    	
+    	this.conexao = new ConnectionFactory().getConnection();
+    	int i=0;
+    	
+    	String sql = "update endereco set numero = ?,  complemento=? "
+                + " where idendereco="+idendereco;
+    	
+        try {
+
+            
+
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setString(1, numero);
+            stmt.setString(2, complemento);
+            i = stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException e) {
+        	
+            e.printStackTrace();
+            
+        } finally {this.conexao.close();}
+
+        return i;
+    }
+
+    public Endereco getById(int idendereco) throws SQLException {
+    	
+    	this.conexao = new ConnectionFactory().getConnection();
+        Endereco endereco = new Endereco();
+        
+        String sql = "select e.idendereco, e.cep, e.logradouro, e.bairro, c.nome as \"cidade\", es.sigla as \"estado\", e.complemento, e.numero "
+  			   +"from endereco e inner join cidade c on c.idcidade=e.idcidade "
+  			   +"inner join estado es on es.idestado = c.idestado where e.idendereco = ? ";
+        
+        try {
+
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+
+            stmt.setInt(1, idendereco);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            endereco.setIdendereco(Integer.parseInt(rs.getString("idendereco")));
+            endereco.setCep(rs.getString("cep"));
+            endereco.setLogradouro(rs.getString("logradouro"));
+            endereco.setBairro(rs.getString("bairro"));
+            endereco.setCidade(rs.getString("cidade"));
+            endereco.setEstado(rs.getString("estado"));
+            endereco.setComplemento(rs.getString("complemento"));
+            endereco.setNumero(rs.getString("numero"));
+            
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        } finally {this.conexao.close();}
+
         return endereco;
     }
 }

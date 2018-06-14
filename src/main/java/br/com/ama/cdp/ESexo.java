@@ -1,21 +1,26 @@
 package br.com.ama.cdp;
 
-public enum ESexo{
-	MASCULINO(1,"Masculino"),
-	FEMININO(2,"Feminino");
-	
-	private final int codigo;
-	private final String descricao;
-	
-	ESexo(int _valorOpcao,String _descricao){
+public enum ESexo {
+    MASCULINO(1),
+    FEMININO(2);
+
+    public final int codigo;
+
+    private ESexo(int _valorOpcao) {
         this.codigo = _valorOpcao;
-        this.descricao = _descricao; 
     }
-    public int getCodigo(){
+
+    public int getCodigo() {
         return codigo;
     }
-    
-    public String getDescricao(){
-        return descricao;
+
+    public static ESexo getByCodigo(int cod) {
+        for (ESexo es : values()) {
+            if (es.codigo == cod) {
+                return es;
+            }
+        }
+       throw new IllegalArgumentException("Enum invalido: " + cod);
+       
     }
 }
