@@ -45,16 +45,22 @@ public class HorarioAtendimentoDAO {
         conexao = new ConnectionFactory().getConnection();
 
         String query =  "select idhorarioatendimento from horarioatendimento where\n" +
-                        "horainicio = '12:30:00' and\n" +
-                        "horafim = '18:30:00' and\n" +
-                        "intervalo = '00:30:00' and\n" +
-                        "iddiasemana = 2";
+                        "horainicio = ? and\n" +
+                        "horafim = ? and\n" +
+                        "intervalo = ? and\n" +
+                        "iddiasemana = ?";
 
         int id = -1;
 
+        DiaSemanaDAO dsDAO = new DiaSemanaDAO();
+        int iddiasemana = dsDAO.getId(ha.getDiaSemana());
+
         try {
             PreparedStatement ps = conexao.prepareStatement(query);
-
+            ps.setTime(1,new Time(ha.getHoraInicioMilisseconds()));
+            ps.setTime(2,new Time(ha.getHoraFinalMilisseconds()));
+            ps.setObject(3, ha.getIntervalo());
+            ps.setInt(4, iddiasemana);
             ResultSet rs = ps.executeQuery();
 
             rs.next();

@@ -1,0 +1,30 @@
+Feature: Cadastro de Horario de Atendimento
+
+  Este caso de uso eh responsavel por permitir que o Agente de Saude cadastrado no
+  sistema possa Inserir, Alterar, Consultar ou Excluir um horario de atendimento
+  para que os Pacientes possam ou nao registrar uma consulta.
+
+  Scenario: Cadastrar com Sucesso
+    Given Um agente de saude cadastrado
+    And Um horario de atendimento
+    When Entro com dados validos
+    Then Recebo uma mensagem de sucesso
+
+  Scenario: Cadastrar com Horario Inválido
+    Given Um agente de saude cadastrado
+    And Um horario de atendimento
+    But Existe um horario de atendimento cadastrado no mesmo dia da semana
+    When Entro com dados validos
+    Then Recebo uma mensagem de erro informando que ja existe um horario de atendimento registrado nesse dia da semana
+
+  Scenario: Alterar Horario de Atendimento
+    Given Um agente de saude cadastrado
+    And Um horario de atendimento
+    When Entro com novo horario de atendimento
+    Then Recebo uma mensagem informando que o horario foi alterado
+
+  Scenario: Excluir Horario de Atendimento
+    Given Um agente de saude cadastrado
+    And Um horario de atendimento ja cadastrado
+    When Seleciono a opcao para excluir
+    Then Recebo uma mensagem informando que o horario de atendimento foi excluido
