@@ -10,7 +10,7 @@ import org.junit.Assert;
 public class CadastroEnderecoTest {
 
     private Endereco endereco;
-    private AplEndereco aplendereco = new AplEndereco();
+    private final AplEndereco aplendereco = new AplEndereco();
 
     @Given("^Um endereco nao cadastrado$")
     public void umEnderecoNaoCadastrado() throws Throwable {
@@ -28,7 +28,7 @@ public class CadastroEnderecoTest {
         this.endereco.setCep("29090380");
         this.endereco.setLogradouro("rus teste");
         this.endereco.setBairro("Bairro teste");
-        this.endereco.setCidade("City teste");
+        this.endereco.setCidade("Vila Velha");
         this.endereco.setEstado("ES");
         this.endereco.setComplemento("longe pra carai");
         this.endereco.setNumero("199");
@@ -79,7 +79,7 @@ public class CadastroEnderecoTest {
     @Then("^Recebo uma mensagem informando que os dados foram alterados$")
     public void receboUmaMensagemInformandoQueOsDadosForamAlterados() throws Throwable {
         boolean result = false;
-        if (this.endereco.getNumero() == "199" && this.endereco.getComplemento() == "502") {
+        if ("199".equals(this.endereco.getNumero()) && "502".equals(this.endereco.getComplemento())) {
             result = true;
         }
         Assert.assertEquals(false, result);

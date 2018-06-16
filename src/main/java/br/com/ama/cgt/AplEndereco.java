@@ -11,8 +11,7 @@ import java.sql.SQLException;
 public class AplEndereco{
 	
 	private EnderecoDAO enderecoDAO = new EnderecoDAO();
-	private Endereco _endereco;
-
+	
 	public void validaEndereco(Endereco endereco){
 		if (endereco.getCep()==null){
 			throw new DadoInvalidoException("O campo cep está inválido.");
@@ -38,13 +37,14 @@ public class AplEndereco{
 	}
 
 	
+	@SuppressWarnings("finally")
 	public boolean cadastrarEndereco(Endereco endereco){
 		boolean result=false;
 		try{
 			this.validaEndereco(endereco);
 			enderecoDAO.insert(endereco);
 			result = true;
-		}catch (Exception e){
+		}catch (SQLException e){
 			e.printStackTrace();
 			result = false;
 		}finally {

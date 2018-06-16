@@ -73,7 +73,7 @@ public class CadastroPacienteTest {
     public void euReceboUmaMensagemDeAlerta() throws Throwable {
         boolean result = false;
         try {
-            int resultExpect = aplPaciente.cadastrarPaciente(paciente);
+            aplPaciente.cadastrarPaciente(paciente);
         } catch (Exception e) {
             result = true;
         }

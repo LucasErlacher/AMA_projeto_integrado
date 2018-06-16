@@ -24,8 +24,10 @@ public class EnderecoDAO {
     	try {
     		PreparedStatement stmt = this.conexao.prepareStatement(sql);
     		ResultSet rs = stmt.executeQuery();
-    		rs.next();
-    		id = Integer.parseInt(rs.getString("idcidade"));
+                
+                while(rs.next()){
+                    id = Integer.parseInt(rs.getString("idcidade"));
+                }
     		rs.close();
     		stmt.close();
     	}catch (SQLException e) {
@@ -48,7 +50,8 @@ public class EnderecoDAO {
 
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-
+            
+            
             while (rs.next()) {
                 Endereco endereco = new Endereco();
                 endereco.setIdendereco(Integer.parseInt(rs.getString("idendereco")));
@@ -106,24 +109,23 @@ public class EnderecoDAO {
 				+"(default,?,?,?,?,?,?)";
     	
     	try {
-
-			PreparedStatement stmt = this.conexao.prepareStatement(sql);
-			stmt.setString(1, endereco.getCep());
-			stmt.setString(2, endereco.getLogradouro());
-			stmt.setString(3, endereco.getBairro());
-			stmt.setInt(4, this.getIDCidade(endereco));
-			stmt.setString(5, endereco.getComplemento());
-			stmt.setString(6, endereco.getNumero());
-			i = stmt.executeUpdate();
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setString(1, endereco.getCep());
+            stmt.setString(2, endereco.getLogradouro());
+            stmt.setString(3, endereco.getBairro());
+            stmt.setInt(4, this.getIDCidade(endereco));
+            stmt.setString(5, endereco.getComplemento());
+            stmt.setString(6, endereco.getNumero());
+            i = stmt.executeUpdate();
  	
             stmt.close();
-		} catch (Exception e) {
+	} catch (SQLException e) {
 
-			e.printStackTrace();
+            e.printStackTrace();
 
-		} finally {this.conexao.close();}
+        } finally {this.conexao.close();}
 
-    	return i;
+            return i;
     }
 
     public int update(int idendereco,String numero, String complemento) throws SQLException {
@@ -168,9 +170,9 @@ public class EnderecoDAO {
 
             stmt.setInt(1, idendereco);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-
-            endereco.setIdendereco(Integer.parseInt(rs.getString("idendereco")));
+            
+            while(rs.next()){
+                endereco.setIdendereco(Integer.parseInt(rs.getString("idendereco")));
             endereco.setCep(rs.getString("cep"));
             endereco.setLogradouro(rs.getString("logradouro"));
             endereco.setBairro(rs.getString("bairro"));
@@ -178,6 +180,8 @@ public class EnderecoDAO {
             endereco.setEstado(rs.getString("estado"));
             endereco.setComplemento(rs.getString("complemento"));
             endereco.setNumero(rs.getString("numero"));
+            }
+            
             
             rs.close();
             stmt.close();
