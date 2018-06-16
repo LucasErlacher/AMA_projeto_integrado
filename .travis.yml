@@ -20,8 +20,6 @@ deploy:
 
 script:  
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-  - cd Interface/src/main
-  - mvn install
 
 notifications:
   slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
