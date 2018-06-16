@@ -97,3 +97,4 @@ public class CadastroEnderecoTest {
         Assert.assertNotNull("Endereco excluido", this.endereco);
     }
 }
+//teste
