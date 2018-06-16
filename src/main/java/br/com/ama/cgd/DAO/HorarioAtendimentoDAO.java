@@ -59,7 +59,7 @@ public class HorarioAtendimentoDAO {
 
             rs.next();
 
-            id = rs.getInt(0);
+            id = rs.getInt("idhorarioatendimento");
 
             rs.close();
             ps.close();

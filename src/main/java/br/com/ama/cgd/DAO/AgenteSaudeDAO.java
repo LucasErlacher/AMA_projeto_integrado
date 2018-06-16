@@ -166,9 +166,9 @@ public class AgenteSaudeDAO {
         }
     }
 
-    public List<HorarioAtendimento> consultaHorarioAtendimento(AgenteSaude agenteSaude){
+    public ArrayList<HorarioAtendimento> consultaHorarioAtendimento(AgenteSaude agenteSaude){
         //Resultado
-        List<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
+        ArrayList<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
 
         //CPF do Agente
         String cpf = agenteSaude.getCpf();
