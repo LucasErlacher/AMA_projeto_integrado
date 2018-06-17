@@ -14,21 +14,7 @@ addons:
 script:  
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar      
 
-before_deploy:
-    - apt-get install heroku
-    - heroku
-    - heroku plugins:install heroku-cli-deploy
-    
-deploy:
- provider: heroku
- api_key:
-  secure: $heroku_key
- app: amaproject
- on: devTarcisio   
-
-#after_deploy:
-#    - ls -R
-#*/
 
 notifications:
-  slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+ slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+ 
