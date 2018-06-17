@@ -11,8 +11,8 @@ addons:
     token:
       secure: $sonnar_key
       
-script:  
-    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
 #notifications:
 #slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
