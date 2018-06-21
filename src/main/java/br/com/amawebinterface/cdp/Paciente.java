@@ -1,6 +1,8 @@
 package br.com.amawebinterface.cdp;
 
+import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +25,7 @@ public class Paciente {
 
     //???????
     private int enum_usuario;
-    
+
     private List<Consulta> consultas;
 
     //Construtor
@@ -108,6 +110,31 @@ public class Paciente {
 
     public void setEnum_usuario(int _enum_usuario) {
         this.enum_usuario = _enum_usuario;
+    }
+
+    public boolean validaPaciente() {
+        if (this.cpf == null) {
+            throw new DadoInvalidoException("O campo Cpf está inválido.");
+        }
+        if (this.dataNascimento== null) {
+            throw new DadoInvalidoException("O campo Data Nascimento está inválido.");
+        }
+        if (this.nome == null) {
+            throw new DadoInvalidoException("O campo Nome está inválido.");
+        }
+        if (this.email == null) {
+            throw new DadoInvalidoException("O campo Email está inválido.");
+        }
+        if (this.senha == null) {
+            throw new DadoInvalidoException("O campo Senha está inválido.");
+        }
+        ArrayList<ESexo> sexos = new ArrayList<>();
+        sexos.addAll(Arrays.asList(ESexo.values()));
+        if (!sexos.contains(ESexo.getByCodigo(this.enum_sexo))) {
+            throw new DadoInvalidoException("O campo Sexo está inválido.");
+        }
+        
+        return true;
     }
 
 }

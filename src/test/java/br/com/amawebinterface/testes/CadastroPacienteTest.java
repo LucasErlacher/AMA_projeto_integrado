@@ -14,7 +14,8 @@ import org.junit.Assert;
 public class CadastroPacienteTest {
 
     private Paciente paciente;
-    private AplPaciente aplPaciente = new AplPaciente();
+    private final AplPaciente aplPaciente = new AplPaciente();
+    private String dadoAntigo;
 
     @Given("^Eu sou um paciente nao cadastrado\\.$")
     public void euSouUmPacienteNaoCadastrado() throws Throwable {
@@ -30,17 +31,17 @@ public class CadastroPacienteTest {
 
     @When("^Eu entro com dados validos\\.$")
     public void euEntroComDadosValidos() throws Throwable {
-        Random gerador = new Random();       
-        String dadoNovo = ""+ gerador.nextInt(90000);
-        this.paciente.setCpf(dadoNovo);        
+        Random gerador = new Random();
+        String dadoNovo = "" + gerador.nextInt(90000);
+        this.paciente.setCpf(dadoNovo);
         String target = "2000-01-01";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date result = df.parse(target);
         this.paciente.setDataNascimento(result);
-        this.paciente.setEmail("userTest" + dadoNovo+"@xmail.com");
+        this.paciente.setEmail("userTest" + dadoNovo + "@xmail.com");
         this.paciente.setSenha("admin");
         this.paciente.setNome("User Created by Teste" + dadoNovo);
-        this.paciente.setEnum_sexo(gerador.nextInt(1)+1);
+        this.paciente.setEnum_sexo(gerador.nextInt(1) + 1);
         this.paciente.setEnum_usuario(1);
     }
 
@@ -55,7 +56,10 @@ public class CadastroPacienteTest {
 
     @When("^Eu entro com dados novos\\.$")
     public void euEntroComDadosNovos() throws Throwable {
-        paciente.setEmail("testChanged@xmail.com");
+        Random gerador = new Random();
+        String dadoNovo = "" + gerador.nextInt(90000);
+        dadoAntigo = paciente.getEmail();
+        paciente.setEmail("testChanged" + dadoNovo + "@xmail.com");
         paciente.setSenha("admin1234");
     }
 
@@ -65,15 +69,15 @@ public class CadastroPacienteTest {
 
     @Then("^Eu recebo uma mensagem de sucesso\\.$")
     public void euReceboUmaMensagemDeSucesso() throws Throwable {
-        int resultExpect = aplPaciente.cadastrarPaciente(this.paciente);
-        Assert.assertEquals("Cadastro feito com sucesso", 1, resultExpect);
+        aplPaciente.cadastrarPaciente(this.paciente);
+        Assert.assertNotEquals("Cadastro feito com sucesso", 0, paciente.getId());
     }
 
     @Then("^Eu recebo uma mensagem de alerta\\.$")
     public void euReceboUmaMensagemDeAlerta() throws Throwable {
         boolean result = false;
         try {
-            int resultExpect = aplPaciente.cadastrarPaciente(paciente);
+            aplPaciente.cadastrarPaciente(paciente);
         } catch (Exception e) {
             result = true;
         }
@@ -82,14 +86,22 @@ public class CadastroPacienteTest {
 
     @Then("^Eu recebo uma mensagem de alerta informando que ja tenho acesso\\.$")
     public void euReceboUmaMensagemDeAlertaInformandoQueJaTenhoAcesso() throws Throwable {
-        int resultExpect = aplPaciente.cadastrarPaciente(this.paciente);
-        Assert.assertEquals("Cadastro feito com sucesso", 0, resultExpect);
+//        boolean result = false;
+//        try {
+//            aplPaciente.cadastrarPaciente(paciente);
+//        } catch (Exception e) {
+//            result = true;
+//            e.printStackTrace();
+//        }
+//        Assert.assertTrue("Voce ja tem acesso", result);
+        aplPaciente.cadastrarPaciente(this.paciente);
+        Assert.assertEquals("Cadastro feito com sucesso", 0, paciente.getId());
     }
 
     @Then("^Eu recebo uma mensagem de sucesso informando que os dados foram alterados\\.$")
     public void euReceboUmaMensagemDeSucessoInformandoQueOsDadosForamAlterados() throws Throwable {
-        int resultExpect = aplPaciente.alteraDadosPaciente(paciente);
-        Assert.assertEquals("Dados alterados com sucesso", 1, resultExpect);
+        aplPaciente.alteraDadosPaciente(paciente);
+        Assert.assertNotEquals("Dados alterados com sucesso", paciente.getEmail(), dadoAntigo);
     }
 
     @Then("^Eu eh exibido uma tela com minhas informacoes$")

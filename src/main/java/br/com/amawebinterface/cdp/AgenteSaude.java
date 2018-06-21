@@ -1,6 +1,5 @@
 package br.com.amawebinterface.cdp;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class AgenteSaude extends Paciente {
