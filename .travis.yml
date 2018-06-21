@@ -1,5 +1,8 @@
 language: java
+
+
 dist: trusty
+
 jdk:
  - oraclejdk8
 
@@ -8,6 +11,7 @@ addons:
     organization: "lucaserlacher-github"
     token:
       secure: $sonnar_key
+      
 deploy:
  provider: heroku
  api_key:
