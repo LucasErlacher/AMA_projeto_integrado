@@ -1,5 +1,6 @@
 language: java
 
+
 dist: trusty
 
 jdk:
@@ -11,8 +12,16 @@ addons:
     token:
       secure: $sonnar_key
       
-before_script:  
- - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+deploy:
+ provider: heroku
+ api_key:
+  secure: $heroku_key
+ app:
+  master: amaproject
+ on: master
 
-#notifications:
-#slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+script:  
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
+notifications:
+slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
