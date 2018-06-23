@@ -12,13 +12,13 @@ addons:
     token:
       secure: $sonnar_key
       
-deploy:
- provider: heroku
- api_key:
-  secure: $heroku_key
- app:
-  master: amaproject
- on: master
+#deploy:
+# provider: heroku
+# api_key:
+#  secure: $heroku_key
+# app:
+#  master: amaproject
+# on: master
 
 script:  
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
