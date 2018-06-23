@@ -1,5 +1,6 @@
 language: java
 
+sudo: enable
 
 dist: trusty
 
@@ -11,17 +12,18 @@ addons:
     organization: "lucaserlacher-github"
     token:
       secure: $sonnar_key
-      
-#deploy:
-# provider: heroku
-# api_key:
-#  secure: $heroku_key
-# app:
-#  master: amaproject
-# on: master
 
 script:  
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
+after_success:
+    - HEROKU_API_KEY=$HEROKU_API_KEY mvn clean heroku:deploy-war
+branches:
+  only:
+    - master
+    - devTarcisio
+    - devCaio
+    - devLucas
+
 notifications:
-slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+  slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
