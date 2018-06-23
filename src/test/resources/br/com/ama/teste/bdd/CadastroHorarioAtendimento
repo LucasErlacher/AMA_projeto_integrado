@@ -7,15 +7,15 @@ Feature: Cadastro de Horario de Atendimento
   Scenario: Cadastrar com Sucesso
     Given Um agente de saude cadastrado
     And Um horario de atendimento
-    When Entro com dados validos
+    When Concluo o cadastro
     Then Recebo uma mensagem de sucesso
 
   Scenario: Cadastrar com Horario Inválido
     Given Um agente de saude cadastrado
     And Um horario de atendimento
-    But Existe um horario de atendimento cadastrado no mesmo dia da semana
-    When Entro com dados validos
-    Then Recebo uma mensagem de erro informando que ja existe um horario de atendimento registrado nesse dia da semana
+    But Existe um horario de atendimento com conflito
+    When Concluo o cadastro
+    Then Recebo uma mensagem de erro
 
   Scenario: Alterar Horario de Atendimento
     Given Um agente de saude cadastrado

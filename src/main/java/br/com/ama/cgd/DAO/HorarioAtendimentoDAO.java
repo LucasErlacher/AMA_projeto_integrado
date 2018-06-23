@@ -50,7 +50,7 @@ public class HorarioAtendimentoDAO {
                         "intervalo = ? and\n" +
                         "iddiasemana = ?";
 
-        int id = -1;
+        int id = 0;
 
         DiaSemanaDAO dsDAO = new DiaSemanaDAO();
         int iddiasemana = dsDAO.getId(ha.getDiaSemana());
@@ -78,10 +78,10 @@ public class HorarioAtendimentoDAO {
         return id;
     }
 
-    public List<HorarioAtendimento> getAll(){
+    public ArrayList<HorarioAtendimento> getAll(){
         this.conexao = new ConnectionFactory().getConnection();
 
-        List<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
+        ArrayList<HorarioAtendimento> horariosAtendimento = new ArrayList<>();
 
         String query = "select * from \"horarioatendimento\" ha inner join diasemana ds on (ha.iddiasemana = ds.\"iddiasemana\")";
 
