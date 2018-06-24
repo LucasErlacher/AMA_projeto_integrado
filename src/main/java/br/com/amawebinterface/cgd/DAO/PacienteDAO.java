@@ -126,8 +126,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-
-            return pacientes.get(0);
+            return (pacientes.size() > 0 ? pacientes.get(0) : paciente);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,6 +134,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
     }
 
     public Paciente getByCPF(String cpf) {
+        Paciente paciente = null;
         try {
             this.openConnection();
             String query = "SELECT * FROM PACIENTE WHERE CPF = ? ";
@@ -145,7 +145,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            return pacientes.get(0);
+            return (pacientes.size() > 0 ? pacientes.get(0) : paciente);
         } catch (SQLException e) {
             e.printStackTrace();
         }

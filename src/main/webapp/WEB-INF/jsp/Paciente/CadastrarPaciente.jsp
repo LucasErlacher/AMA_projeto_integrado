@@ -49,8 +49,7 @@
             });
 
             $("#formulario").submit(function () {
-                cpf.unmask();
-                alert(cpf);
+                cpf.unmask();                
             });
         </script>
 </body>

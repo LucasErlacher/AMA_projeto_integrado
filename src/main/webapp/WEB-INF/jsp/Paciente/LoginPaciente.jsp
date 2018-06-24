@@ -16,7 +16,7 @@
                 <h3 style="text-align: center;">Paciente</h3><hr>
                 <img id="profile-img" class="profile-img-card" src="${cp}/resources/images/avatarlogin.png" />
                 <p id="profile-name" class="profile-name-card"></p>
-                <form class="form-signin" action="realizarLoginPaciente" id="formulario">
+                <form class="form-signin" action="HomePagePaciente" id="formulario" method="POST">
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="text" id="email" name="cpf" class="form-control" placeholder="CPF" required autofocus>
                     <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>

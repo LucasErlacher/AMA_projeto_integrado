@@ -12,35 +12,51 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PacienteController {
 
-    private AplPaciente aplPaciente = new AplPaciente();
+    private final AplPaciente aplPaciente = new AplPaciente();
 
-    @RequestMapping(value = "/Paciente/EfetuarLoginPaciente")
+    @RequestMapping(value = "/Paciente/LoginPaciente")
     public String LoginPaciente() {
         return "Paciente/LoginPaciente";
     }
+    
+    @RequestMapping(value = "/Paciente/LogoutPaciente")
+    public String LogoutPaciente(HttpSession session) {
+        session.removeAttribute("pacienteLogado");
+        return "Paciente/LoginPaciente";
+    }
 
-    @RequestMapping(value = "/Paciente/CadastrarPaciente")
+    @RequestMapping(value = "/Paciente//CadastrarPaciente")
     public String CadastroPaciente() {
         return "Paciente/CadastrarPaciente";
     }
 
-    @RequestMapping(value = "/Paciente/adicionarPaciente", method = RequestMethod.POST)
+    @RequestMapping(value = "/Paciente/NovoPaciente", method = RequestMethod.POST)
     public String adicionarPaciente(Paciente _paciente) {
         this.aplPaciente.cadastrarPaciente(_paciente);
-        return "Paciente/LoginPaciente";
-    }
-
-    @RequestMapping(value = "/Paciente/realizarLoginPaciente", method = RequestMethod.POST)
-    public String realizarLoginPaciente(Paciente _paciente, HttpSession session) {
-        if (this.aplPaciente.consultarPacienteLogineSenha(_paciente) != null) {
-            session.setAttribute("usuarioLogado", _paciente);
-            return "Paciente/HomePagePaciente";
+        if(_paciente.getId()!=0){
+            return "Paciente/LoginPaciente";
         }
         return "Paciente/LoginPaciente";
+        
+    }
+
+    @RequestMapping(value = "/Paciente/HomePagePaciente")
+    public ModelAndView realizarLoginPaciente(Paciente paciente, HttpSession session) {
+        ModelAndView mv;
+        paciente = this.aplPaciente.consultarPacienteLogineSenha(paciente);
+        if (paciente != null) {
+            session.setAttribute("pacienteLogado", paciente);
+            mv = new ModelAndView("Paciente/HomePagePaciente");
+            mv.addObject("paciente",paciente);
+            return mv;
+        }
+        mv = new ModelAndView("Paciente/LoginPaciente");    
+        return mv;
     }
 
     @InitBinder
