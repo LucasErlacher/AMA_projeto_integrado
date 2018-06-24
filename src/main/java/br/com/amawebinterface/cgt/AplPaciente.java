@@ -27,7 +27,7 @@ public class AplPaciente {
     }
     
     public void alteraDadosPaciente(Paciente paciente) {
-        this.pacienteDAO.update(paciente);
+        if(paciente.validaPaciente())this.pacienteDAO.update(paciente);
     }
     
     public void listarDados(Paciente paciente) {

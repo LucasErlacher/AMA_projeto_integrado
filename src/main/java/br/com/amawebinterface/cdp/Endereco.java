@@ -1,5 +1,7 @@
 package br.com.amawebinterface.cdp;
 
+import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+
 public class Endereco {
 
     private int idendereco;
@@ -91,6 +93,29 @@ public class Endereco {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+        public void validaEndereco(){
+		if (this.getCep()==null){
+			throw new DadoInvalidoException("O campo cep está inválido.");
+		}
+		if (this.getLogradouro()==null){
+			throw new DadoInvalidoException("O campo Logradouro está inválido.");
+		}
+		if (this.getBairro()==null){
+			throw new DadoInvalidoException("O campo Bairro está inválido.");
+		}
+		if (this.getCidade()==null){
+			throw new DadoInvalidoException("O campo Cidade está inválido.");
+		}
+		if (this.getEstado()==null){
+			throw new DadoInvalidoException("O campo Estado está inválido.");
+		}
+		if (this.getComplemento()==null){
+			throw new DadoInvalidoException("O campo Complemento está inválido.");
+		}
+		if (this.getNumero()==null){
+			throw new DadoInvalidoException("O campo Numero está inválido.");
+		}
 	}
     
 }

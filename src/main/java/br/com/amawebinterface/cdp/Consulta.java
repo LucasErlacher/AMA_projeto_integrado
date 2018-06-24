@@ -8,5 +8,8 @@ public class Consulta {
     private AgenteSaude agenteSaude;
     private LocalAtendimento localAtendimento;    
     private Date inicioAtendimento;
+    private int enum_status;
+    
+    
 
 }

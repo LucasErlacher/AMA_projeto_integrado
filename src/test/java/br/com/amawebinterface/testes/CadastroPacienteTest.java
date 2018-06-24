@@ -51,7 +51,7 @@ public class CadastroPacienteTest {
 
     @When("^Eu entro com dados registrados\\.$")
     public void euEntroComDadosRegistrados() throws Throwable {
-        paciente.setCpf("14805897724");
+        paciente.setCpf("13989292714");
     }
 
     @When("^Eu entro com dados novos\\.$")
@@ -86,14 +86,6 @@ public class CadastroPacienteTest {
 
     @Then("^Eu recebo uma mensagem de alerta informando que ja tenho acesso\\.$")
     public void euReceboUmaMensagemDeAlertaInformandoQueJaTenhoAcesso() throws Throwable {
-//        boolean result = false;
-//        try {
-//            aplPaciente.cadastrarPaciente(paciente);
-//        } catch (Exception e) {
-//            result = true;
-//            e.printStackTrace();
-//        }
-//        Assert.assertTrue("Voce ja tem acesso", result);
         aplPaciente.cadastrarPaciente(this.paciente);
         Assert.assertEquals("Cadastro feito com sucesso", 0, paciente.getId());
     }

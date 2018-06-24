@@ -30,7 +30,7 @@ public class CadastroEnderecoTest {
         this.endereco.setBairro("Bairro teste");
         this.endereco.setCidade("Vila Velha");
         this.endereco.setEstado("ES");
-        this.endereco.setComplemento("longe pra carai");
+        this.endereco.setComplemento("Distante");
         this.endereco.setNumero("199");
     }
 

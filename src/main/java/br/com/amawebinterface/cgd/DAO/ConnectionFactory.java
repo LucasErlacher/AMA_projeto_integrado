@@ -5,14 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    
-    private static final String URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/sxkmvllg";
-    private static final String USER = "sxkmvllg";
-    private static final String PASS = "RgEYHVSVFZkV08cXHGOymH9wO6HOllmP";
 
-    public static Connection getConnection()  {
+    private static  String URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/sxkmvllg";
+    private static  String USER = "sxkmvllg";
+    private static  String PASS = "RgEYHVSVFZkV08cXHGOymH9wO6HOllmP";
+
+    public static Connection getConnection() {
         Connection con = null;
         try {
+            //URL = "jdbc:postgresql://localhost:5432/AMA BD2";
+            //USER = "postgres";
+            //PASS = "admin";
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException e) {
@@ -20,5 +23,5 @@ public class ConnectionFactory {
         }
         return con;
     }
-    
+
 }

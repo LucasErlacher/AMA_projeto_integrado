@@ -23,10 +23,10 @@ public class Paciente {
     private String email;
     private int enum_sexo;
 
+    private List<Consulta> consultas;
+    
     //???????
     private int enum_usuario;
-
-    private List<Consulta> consultas;
 
     //Construtor
     public Paciente(int _id, String _cpf, String _senha, Date _dataNascimento,
@@ -110,6 +110,14 @@ public class Paciente {
 
     public void setEnum_usuario(int _enum_usuario) {
         this.enum_usuario = _enum_usuario;
+    }
+    
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
     }
 
     public boolean validaPaciente() {

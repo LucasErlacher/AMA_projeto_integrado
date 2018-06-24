@@ -3,7 +3,6 @@ package br.com.amawebinterface.cgt;
 
 import br.com.amawebinterface.cdp.Endereco;
 import br.com.amawebinterface.cgd.DAO.EnderecoDAO;
-import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
 import java.sql.SQLException;
 
 
@@ -12,36 +11,10 @@ public class AplEndereco{
 	
 	private EnderecoDAO enderecoDAO = new EnderecoDAO();
 	
-	public void validaEndereco(Endereco endereco){
-		if (endereco.getCep()==null){
-			throw new DadoInvalidoException("O campo cep está inválido.");
-		}
-		if (endereco.getLogradouro()==null){
-			throw new DadoInvalidoException("O campo Logradouro está inválido.");
-		}
-		if (endereco.getBairro()==null){
-			throw new DadoInvalidoException("O campo Bairro está inválido.");
-		}
-		if (endereco.getCidade()==null){
-			throw new DadoInvalidoException("O campo Cidade está inválido.");
-		}
-		if (endereco.getEstado()==null){
-			throw new DadoInvalidoException("O campo Estado está inválido.");
-		}
-		if (endereco.getComplemento()==null){
-			throw new DadoInvalidoException("O campo Complemento está inválido.");
-		}
-		if (endereco.getNumero()==null){
-			throw new DadoInvalidoException("O campo Numero está inválido.");
-		}
-	}
-
-	
-	@SuppressWarnings("finally")
 	public boolean cadastrarEndereco(Endereco endereco){
 		boolean result=false;
 		try{
-			this.validaEndereco(endereco);
+                        endereco.validaEndereco();
 			enderecoDAO.insert(endereco);
 			result = true;
 		}catch (SQLException e){
