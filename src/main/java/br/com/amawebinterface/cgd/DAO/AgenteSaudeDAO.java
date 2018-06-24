@@ -1,16 +1,16 @@
 package br.com.amawebinterface.cgd.DAO;
 
 import br.com.amawebinterface.cdp.AgenteSaude;
-import br.com.amawebinterface.cgd.DAO.PacienteDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.postgresql.util.PSQLException;
 import java.util.List;
 
 public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
 
-    private PacienteDAO pacienteDAO = new PacienteDAO();
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
 
     public AgenteSaudeDAO() {
     }
@@ -25,7 +25,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             PreparedStatement stmt;
             stmt = this.con.prepareStatement(query);
             ResultSet rs = this.executeQuery(stmt);
-            agentes = retriveAgenteSaudes(rs);
+            agentes = retriveAgenteSaude(rs);
             rs.close();
             stmt.close();
             this.closeConnection();
@@ -43,7 +43,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             PreparedStatement stmt = this.con.prepareStatement(query);;
             stmt.setLong(0, id);
             ResultSet rs = this.executeQuery(stmt);
-            List<AgenteSaude> pacientes = retriveAgenteSaudes(rs);
+            List<AgenteSaude> pacientes = retriveAgenteSaude(rs);
             rs.close();
             stmt.close();
             this.closeConnection();
@@ -63,7 +63,10 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt.setInt(1, paciente.getId());
             executeUpdate(stmt);
             this.closeConnection();
-        } catch (Exception e) {
+        }catch (PSQLException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,8 +80,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
                 String query
                         = " insert into agentesaude (idagentesaude, inscricao,idestado,idtiporegistro)"
                         + " values "
-                        + " (?,?,(Select idestado from estado where nome like ?),?) "
-                        + " on conflict do nothing ";
+                        + " (?,?,(Select idestado from estado where nome like ?),?) ";
 
                 PreparedStatement stmt = this.con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, agenteSaude.getId());
@@ -88,7 +90,9 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
                 executeUpdate(stmt);
                 this.closeConnection();
             }
-        } catch (SQLException e) {
+        }catch (PSQLException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -111,7 +115,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt.setString(1, _login);
             stmt.setString(2, _senha);
             ResultSet rs = this.executeQuery(stmt);
-            List<AgenteSaude> agentes = retriveAgenteSaudes(rs);
+            List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
             stmt.close();
             this.closeConnection();
@@ -132,7 +136,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             PreparedStatement stmt = this.con.prepareStatement(query);
             stmt.setString(1, cpf);
             ResultSet rs = this.executeQuery(stmt);
-            List<AgenteSaude> agentes = retriveAgenteSaudes(rs);
+            List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
             stmt.close();
             this.closeConnection();
@@ -146,12 +150,12 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
         return null;
     }
 
-    private List<AgenteSaude> retriveAgenteSaudes(ResultSet rs) {
+    private List<AgenteSaude> retriveAgenteSaude(ResultSet rs) {
         try {
             List<AgenteSaude> agentes = new ArrayList<>();
             while (rs.next()) {
                 AgenteSaude agente = new AgenteSaude();
-                agente.setId(Integer.parseInt(rs.getString("idpaciente")));
+                agente.setId(Integer.parseInt(rs.getString("idagentesaude")));
                 agente.setNome(rs.getString("nome"));
                 agente.setCpf(rs.getString("cpf"));
                 agente.setEmail(rs.getString("email"));

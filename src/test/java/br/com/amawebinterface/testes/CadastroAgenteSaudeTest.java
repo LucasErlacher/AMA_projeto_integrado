@@ -1,8 +1,9 @@
 package br.com.amawebinterface.testes;
 
 import br.com.amawebinterface.cdp.AgenteSaude;
-import br.com.amawebinterface.cdp.Paciente;
 import br.com.amawebinterface.cgt.AplAgenteSaude;
+import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+import br.com.amawebinterface.util.Excecoes.DadoRepetidoException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -58,7 +59,7 @@ public class CadastroAgenteSaudeTest {
         boolean result = false;
         try {
             aplAgenteSaude.cadastrarAgenteSaude(agente);
-        } catch (Exception e) {
+        } catch (DadoInvalidoException e) {
             result = true;
         }
         Assert.assertTrue("Não foi possivel cadastrar com os dados apresentados", result);
@@ -74,12 +75,18 @@ public class CadastroAgenteSaudeTest {
     @When("^Eu entro com dados de agente de saude registrados\\.$")
     public void euEntroComDadosDeAgenteDeSaudeRegistrados() throws Throwable {
         this.agente.setCpf("13989292714");
+        this.agente.setEmail("DoctorsChengeEmail55673@xmail.com");
     }
 
     @Then("^Eu agente recebo uma mensagem de alerta informando que ja tenho acesso\\.$")
     public void euAgenteReceboUmaMensagemDeAlertaInformandoQueJaTenhoAcesso() throws Throwable {
-        aplAgenteSaude.cadastrarAgenteSaude(this.agente);
-        Assert.assertEquals("Cadastro feito com sucesso", 0, agente.getId());
+        boolean result = false;
+        try {
+            aplAgenteSaude.cadastrarAgenteSaude(agente);
+        } catch (DadoRepetidoException e) {
+            result = true;
+        }
+        Assert.assertTrue("Não foi possivel cadastrar com os dados apresentados", result);
     }
 
     @When("^Eu entro com dados de agente de saude  novos\\.$")
@@ -87,7 +94,7 @@ public class CadastroAgenteSaudeTest {
         Random gerador = new Random();
         String dadoNovo = "" + gerador.nextInt(90000);
         dadoAntigo = agente.getEmail();
-        agente.setEmail("DoctorChanged" + dadoNovo + "@xmail.com");
+        agente.setEmail("DoctorsChengeEmail" + dadoNovo + "@xmail.com");
         agente.setSenha("admin1234");
     }
 
@@ -95,13 +102,6 @@ public class CadastroAgenteSaudeTest {
     public void euAgenteReceboUmaMensagemDeSucessoInformandoQueOsDadosForamAlterados() throws Throwable {
         aplAgenteSaude.alteraDadosAgente(agente);
         Assert.assertNotEquals("Dados alterados com sucesso", agente.getEmail(), dadoAntigo);
-    }
-
-    @Given("^Eu sou um agente cadastrado\\.$")
-    public void euSouUmAgenteCadastrado() throws Throwable {
-        this.agente = new AgenteSaude();
-        this.agente.setCpf("14805897724");
-        this.agente = aplAgenteSaude.consultarAgenteCPF(this.agente);
     }
 
     @When("^Eu entro na tela de informacoes do agente\\.$")

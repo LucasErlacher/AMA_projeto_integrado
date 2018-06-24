@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.amawebinterface.cdp.*;
+import org.postgresql.util.PSQLException;
 
 public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
 
@@ -44,6 +45,8 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             stmt.close();
             this.closeConnection();
             return pacientes.get(0);
+        } catch (PSQLException e) {
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,10 +74,8 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             String query
                     = " insert into paciente (idpaciente, senha,cpf,datanascimento,nome,email,idtipousuario,idsexo)"
                     + " values "
-                    + " (default,?,?,?,?,?,?,?) "
-                    + " on conflict do nothing ";
-
-            PreparedStatement stmt = this.con.prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
+                    + " (default,?,?,?,?,?,?,?) ";
+            PreparedStatement stmt = this.con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, paciente.getSenha());
             stmt.setString(2, paciente.getCpf());
             stmt.setDate(3, new java.sql.Date(paciente.getDataNascimento().getTime()));
@@ -83,8 +84,10 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             stmt.setInt(6, paciente.getEnum_usuario());
             stmt.setInt(7, paciente.getEnum_sexo());
             int i = executeUpdate(stmt);
-            paciente.setId(i);
+            paciente.setId(i);            
             this.closeConnection();
+        } catch (PSQLException e) {
+            System.out.println("O codigo do erro gerado foi: " + e.getErrorCode());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -123,7 +126,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            
+
             return pacientes.get(0);
         } catch (SQLException e) {
             e.printStackTrace();

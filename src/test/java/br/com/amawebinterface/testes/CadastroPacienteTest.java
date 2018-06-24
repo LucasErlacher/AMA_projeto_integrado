@@ -2,6 +2,7 @@ package br.com.amawebinterface.testes;
 
 import br.com.amawebinterface.cdp.Paciente;
 import br.com.amawebinterface.cgt.AplPaciente;
+import br.com.amawebinterface.util.Excecoes.DadoRepetidoException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -86,8 +87,13 @@ public class CadastroPacienteTest {
 
     @Then("^Eu recebo uma mensagem de alerta informando que ja tenho acesso\\.$")
     public void euReceboUmaMensagemDeAlertaInformandoQueJaTenhoAcesso() throws Throwable {
-        aplPaciente.cadastrarPaciente(this.paciente);
-        Assert.assertEquals("Cadastro feito com sucesso", 0, paciente.getId());
+        boolean result = false;
+        try {
+            aplPaciente.cadastrarPaciente(this.paciente);
+        } catch (DadoRepetidoException e) {
+            result = true;
+        }
+        Assert.assertTrue("Não foi possivel cadastrar com os dados apresentados", result);
     }
 
     @Then("^Eu recebo uma mensagem de sucesso informando que os dados foram alterados\\.$")

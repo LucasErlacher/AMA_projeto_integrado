@@ -23,6 +23,6 @@ When  Eu entro com dados de agente de saude  novos.
 Then  Eu agente recebo uma mensagem de sucesso informando que os dados foram alterados.
 
 Scenario: Consulta de Informacoes do Agente.
-Given  Eu sou um agente cadastrado.
+Given  Eu sou um agentesaude cadastrado.
 When  Eu entro na tela de informacoes do agente.
 Then  Eh exibido uma tela com minhas informacoes de agente de saude.
