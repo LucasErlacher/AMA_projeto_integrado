@@ -12,7 +12,7 @@ import org.postgresql.util.PSQLException;
 
 public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
     
-    private final Logger logger = Logger.getLogger(PacienteDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(PacienteDAO.class.getName());
     public PacienteDAO() {
     }
 
@@ -143,7 +143,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
         try {
             this.openConnection();
             String query = "SELECT * FROM PACIENTE WHERE CPF = ? ";
-            PreparedStatement stmt = this.con.prepareStatement(query);;
+            PreparedStatement stmt = this.con.prepareStatement(query);
             stmt.setString(1, cpf);
             ResultSet rs = this.executeQuery(stmt);
             List<Paciente> pacientes = retrivePacientes(rs);

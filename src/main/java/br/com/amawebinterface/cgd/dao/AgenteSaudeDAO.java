@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
 
     private final PacienteDAO pacienteDAO = new PacienteDAO();
-    private final Logger logger = Logger.getLogger(AgenteSaudeDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(AgenteSaudeDAO.class.getName());
     
     @Override
     public List<AgenteSaude> findAll() {
@@ -37,11 +37,9 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
 
     @Override
     public AgenteSaude findbyID(Long id) {
-        try {
-            this.openConnection();
-            String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
-            PreparedStatement stmt;
-            stmt = this.con.prepareStatement(query);
+        this.openConnection();
+        String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
+        try(PreparedStatement stmt = this.con.prepareStatement(query)) {                                    
             stmt.setLong(1, id);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
