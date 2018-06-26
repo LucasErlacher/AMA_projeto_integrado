@@ -19,10 +19,9 @@ public class DAOGeneric {
     protected ResultSet executeQuery(PreparedStatement statement) {
         // Comando para select		
         try {
-            ResultSet rs = statement.executeQuery();
-
+            ResultSet rs = statement.executeQuery();            
+            statement.close();
             return rs;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,8 +37,9 @@ public class DAOGeneric {
             while (rs.next()) {
                 numero = rs.getInt(1);
             }
+            rs.close();
             statement.close();
-        } catch (PSQLException e) {
+        }catch (PSQLException e) {
             //Class 23 — Integrity Constraint Violation by PostGreSQL Error Code Between 23000 and 24000
             if(Integer.parseInt(e.getSQLState()) >= 23000 && Integer.parseInt(e.getSQLState()) <= 24000) //
                 throw new DadoRepetidoException("Ja existe um registro com as informações dadas");

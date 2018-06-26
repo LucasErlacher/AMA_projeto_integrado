@@ -41,7 +41,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             this.openConnection();
             String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
             PreparedStatement stmt = this.con.prepareStatement(query);
-            stmt.setLong(0, id);
+            stmt.setLong(1, id);
             ResultSet rs = this.executeQuery(stmt);
             List<Paciente> pacientes = retrivePacientes(rs);
             rs.close();
@@ -129,8 +129,10 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            if(pacientes.size() > 0 )return pacientes.get(0);
-            } catch (SQLException e) {
+            if (paciente != null) {
+                return pacientes.get(0);
+            }
+        } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }
         return paciente;
@@ -148,7 +150,9 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            if(pacientes.size() > 0 )return pacientes.get(0);
+            if (pacientes != null) {
+                return pacientes.get(0);
+            }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

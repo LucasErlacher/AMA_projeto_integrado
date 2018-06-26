@@ -44,12 +44,12 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt = this.con.prepareStatement(query);
             stmt.setLong(1, id);
             ResultSet rs = this.executeQuery(stmt);
-            List<AgenteSaude> pacientes = retriveAgenteSaude(rs);
+            List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             stmt.close();
             rs.close();
             this.closeConnection();
-            if (pacientes.size() > 0) {
-                return pacientes.get(0);
+            if (agentes != null) {
+                return agentes.get(0);
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
@@ -125,7 +125,9 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            if(agentes.size() > 0 )return agentes.get(0);
+            if (agentes != null) {
+                return agentes.get(0);
+            }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }
@@ -147,7 +149,9 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            if(agentes.size() > 0 )return agentes.get(0);
+            if (agentes != null) {
+                return agentes.get(0);
+            }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         } catch (NullPointerException e) {
