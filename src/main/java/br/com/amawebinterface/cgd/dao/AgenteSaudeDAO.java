@@ -14,156 +14,141 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
 
     private final PacienteDAO pacienteDAO = new PacienteDAO();
     private static final Logger logger = Logger.getLogger(AgenteSaudeDAO.class.getName());
-    
+
     @Override
     public List<AgenteSaude> findAll() {
-        List<AgenteSaude> agentes = new ArrayList<>();
-        try {
-            this.openConnection();
-            String query = "SELECT * FROM PACIENTE P "
-                    + "     INNER JOIN AGENTESAUDE AG ON AG.IDAGENTESAUDE=P.IDPACIENTE ";
-            PreparedStatement stmt;
-            stmt = this.con.prepareStatement(query);
+        List<AgenteSaude> agentes = null;
+        this.openConnection();
+        String query = "SELECT * FROM PACIENTE P "
+                + "     INNER JOIN AGENTESAUDE AG ON AG.IDAGENTESAUDE=P.IDPACIENTE ";
+        try (PreparedStatement stmt = this.con.prepareStatement(query)) {
             ResultSet rs = this.executeQuery(stmt);
             agentes = retriveAgenteSaude(rs);
             rs.close();
-            stmt.close();
-            this.closeConnection();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            this.closeConnection();
         }
         return agentes;
     }
 
     @Override
     public AgenteSaude findbyID(Long id) {
+        AgenteSaude agente = null;
         this.openConnection();
         String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
-        try(PreparedStatement stmt = this.con.prepareStatement(query)) {                                    
+        try (PreparedStatement stmt = this.con.prepareStatement(query)) {
             stmt.setLong(1, id);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
-            stmt.close();            
-            this.closeConnection();
             if (agentes != null) {
-                return agentes.get(0);
+                agente = agentes.get(0);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             logger.log(Level.SEVERE, e.getMessage());
-        } catch (NullPointerException e) {
-            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            this.closeConnection();
         }
-        return null;
+        return agente;
     }
 
     @Override
     public void delete(AgenteSaude agente) {
+        this.openConnection();
         String query = "DELETE IF EXISTS FROM PACIENTE WHERE ID = ?";
-        PreparedStatement stmt;
-        try {
-            this.openConnection();
-            stmt = this.con.prepareStatement(query);
+        try (PreparedStatement stmt = this.con.prepareStatement(query)) {
             stmt.setInt(1, agente.getId());
             executeUpdate(stmt);
-            stmt.close();
-            this.closeConnection();
         } catch (PSQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            this.closeConnection();
         }
     }
 
     @Override
     public void insert(AgenteSaude agenteSaude) {
+        this.pacienteDAO.insert(agenteSaude);
         String query
                 = " insert into agentesaude (idagentesaude, inscricao,idestado,idtiporegistro)"
                 + " values "
                 + " (?,?,(Select idestado from estado where nome like ?),?) ";
-
-        PreparedStatement stmt;
-        try {
-            this.pacienteDAO.insert(agenteSaude);
-            if (agenteSaude.getId() != 0) {
-                this.openConnection();
-                stmt = this.con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        this.openConnection();
+        if (agenteSaude.getId() != 0) {
+            try (PreparedStatement stmt = this.con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 stmt.setInt(1, agenteSaude.getId());
                 stmt.setString(2, agenteSaude.getInscricao());
                 stmt.setString(3, agenteSaude.getEstado());
                 stmt.setInt(4, agenteSaude.getEnum_registro());
                 executeUpdate(stmt);
-                stmt.close();
+            } catch (PSQLException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            } catch (SQLException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            } finally {
                 this.closeConnection();
             }
-        } catch (PSQLException e) {
-            logger.log(Level.SEVERE, e.getMessage());
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, e.getMessage());
         }
-
     }
 
     @Override
     public void update(AgenteSaude agente) {
-
+        /*Metodo nao precisa de implementacao pois utiliza do PacienteDAO*/
     }
 
-    public AgenteSaude getByLoginAndSenha(String _login, String _senha) {
+    public AgenteSaude getByLoginAndSenha(String login, String senha) {
         AgenteSaude agente = null;
         String query = " Select * from Paciente P "
                 + " inner join AgenteSaude AG on AG.IdAgenteSaude =  P.IdPaciente "
                 + " WHERE CPF LIKE ? AND SENHA LIKE ?";
-        PreparedStatement stmt;
-        try {
-            this.openConnection();
-            stmt = this.con.prepareStatement(query);
-            stmt.setString(1, _login);
-            stmt.setString(2, _senha);
+        this.openConnection();
+        try (PreparedStatement stmt = this.con.prepareStatement(query)) {
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
-            stmt.close();            
-            this.closeConnection();
             if (agentes != null) {
-                return agentes.get(0);
+                agente = agentes.get(0);
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            this.closeConnection();
         }
         return agente;
     }
 
     public AgenteSaude getByCPF(String cpf) {
+        AgenteSaude agente = null;
         String query = " Select *,E.Nome as \"Estado\" from Paciente P "
-                    + " inner join AgenteSaude AG on AG.IdAgenteSaude =  P.IdPaciente "
-                    + " inner join Estado E on E.IdEstado = AG.Idestado "
-                    + " WHERE CPF LIKE ? ";
-        PreparedStatement stmt;
-        try {
-            this.openConnection();
-            stmt = this.con.prepareStatement(query);
+                + " inner join AgenteSaude AG on AG.IdAgenteSaude =  P.IdPaciente "
+                + " inner join Estado E on E.IdEstado = AG.Idestado "
+                + " WHERE CPF LIKE ? ";
+        this.openConnection();
+        try (PreparedStatement stmt = this.con.prepareStatement(query)) {
             stmt.setString(1, cpf);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            rs.close();            
-            stmt.close();            
-            this.closeConnection();
+            rs.close();
             if (agentes != null) {
-                return agentes.get(0);
+                agente = agentes.get(0);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             logger.log(Level.SEVERE, e.getMessage());
-        } catch (NullPointerException e) {
-            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            this.closeConnection();
         }
-
-        return null;
+        return agente;
     }
 
     private List<AgenteSaude> retriveAgenteSaude(ResultSet rs) {
+        List<AgenteSaude> agentes = new ArrayList<>();
         try {
-            List<AgenteSaude> agentes = new ArrayList<>();
             while (rs.next()) {
                 AgenteSaude agente = new AgenteSaude();
                 agente.setId(Integer.parseInt(rs.getString("idagentesaude")));
@@ -178,10 +163,9 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
                 agente.setEstado(rs.getString("Estado"));
                 agentes.add(agente);
             }
-            return agentes;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
-        return null;
+        return agentes;
     }
 }

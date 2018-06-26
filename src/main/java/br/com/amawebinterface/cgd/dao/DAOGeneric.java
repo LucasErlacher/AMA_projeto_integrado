@@ -5,12 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.postgresql.util.PSQLException;
 
 public class DAOGeneric {
 
     protected Connection con;
-    
+    private static final Logger logger = Logger.getLogger(DAOGeneric.class.getName());
+
     protected void openConnection() {
         con = ConnectionFactory.getConnection();
         //this.hashError.new HashMap<Integer,Integer>();
@@ -20,29 +23,40 @@ public class DAOGeneric {
         // Comando para select
         ResultSet rs = null;
         try {
-            rs = statement.executeQuery();            
+            rs = statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return rs;
     }
 
-    protected int executeUpdate(PreparedStatement statement){
+    protected int executeUpdate(PreparedStatement statement) {
         int numero = 0;
-        // Comando para update, insert e delete		
         try {
             statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys();
+        } catch (PSQLException e) {
+            //Class 23 — Integrity Constraint Violation by PostGreSQL Error Code Between 23000 and 24000
+            if (Integer.parseInt(e.getSQLState()) >= 23000 && Integer.parseInt(e.getSQLState()) <= 24000) //
+            {
+                throw new DadoRepetidoException("Ja existe um registro com as informações dadas");
+            }
+            logger.log(Level.SEVERE, e.getMessage());
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        }
+        try (ResultSet rs = statement.getGeneratedKeys()) {
             while (rs.next()) {
                 numero = rs.getInt(1);
             }
-        }catch (PSQLException e) {
+        } catch (PSQLException e) {
             //Class 23 — Integrity Constraint Violation by PostGreSQL Error Code Between 23000 and 24000
-            if(Integer.parseInt(e.getSQLState()) >= 23000 && Integer.parseInt(e.getSQLState()) <= 24000) //
+            if (Integer.parseInt(e.getSQLState()) >= 23000 && Integer.parseInt(e.getSQLState()) <= 24000) //
+            {
                 throw new DadoRepetidoException("Ja existe um registro com as informações dadas");
-            e.printStackTrace();
+            }
+            logger.log(Level.SEVERE, e.getMessage());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return numero;
     }
@@ -51,7 +65,7 @@ public class DAOGeneric {
         try {
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 

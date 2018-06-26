@@ -6,7 +6,7 @@ public class Consulta {
 
     private Paciente paciente;
     private AgenteSaude agenteSaude;
-    private LocalAtendimento localAtendimento;    
+    private LocalAtendimento localAtendimento;
     private Date inicioAtendimento;
     private int enumStatus;
 
@@ -49,7 +49,5 @@ public class Consulta {
     public void setEnumStatus(int enumStatus) {
         this.enumStatus = enumStatus;
     }
-    
-    
 
 }

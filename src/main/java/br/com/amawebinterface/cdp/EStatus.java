@@ -1,11 +1,11 @@
 package br.com.amawebinterface.cdp;
 
 public enum EStatus {
-	ABERTO(1),
-	CANCELADO(2),
-	CONCLUIDO(3);
-	
- public final int codigo;
+    ABERTO(1),
+    CANCELADO(2),
+    CONCLUIDO(3);
+
+    public final int codigo;
 
     private EStatus(int _valorOpcao) {
         this.codigo = _valorOpcao;
@@ -24,4 +24,3 @@ public enum EStatus {
         throw new IllegalArgumentException("Enum invalido: " + cod);
     }
 }
-
