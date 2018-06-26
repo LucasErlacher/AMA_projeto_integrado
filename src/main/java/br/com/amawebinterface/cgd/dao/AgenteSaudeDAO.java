@@ -37,16 +37,16 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
 
     @Override
     public AgenteSaude findbyID(Long id) {
-        String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
-        PreparedStatement stmt;
         try {
             this.openConnection();
+            String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
+            PreparedStatement stmt;
             stmt = this.con.prepareStatement(query);
             stmt.setLong(1, id);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            stmt.close();
             rs.close();
+            stmt.close();            
             this.closeConnection();
             if (agentes != null) {
                 return agentes.get(0);
@@ -68,6 +68,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt = this.con.prepareStatement(query);
             stmt.setInt(1, agente.getId());
             executeUpdate(stmt);
+            stmt.close();
             this.closeConnection();
         } catch (PSQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
@@ -94,6 +95,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
                 stmt.setString(3, agenteSaude.getEstado());
                 stmt.setInt(4, agenteSaude.getEnum_registro());
                 executeUpdate(stmt);
+                stmt.close();
                 this.closeConnection();
             }
         } catch (PSQLException e) {
@@ -122,8 +124,8 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt.setString(2, _senha);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            stmt.close();
             rs.close();
+            stmt.close();            
             this.closeConnection();
             if (agentes != null) {
                 return agentes.get(0);
@@ -146,8 +148,8 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt.setString(1, cpf);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            stmt.close();
             rs.close();            
+            stmt.close();            
             this.closeConnection();
             if (agentes != null) {
                 return agentes.get(0);

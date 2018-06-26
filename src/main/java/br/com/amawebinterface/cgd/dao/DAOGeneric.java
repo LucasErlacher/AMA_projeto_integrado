@@ -36,7 +36,6 @@ public class DAOGeneric {
             while (rs.next()) {
                 numero = rs.getInt(1);
             }
-            statement.close();
         }catch (PSQLException e) {
             //Class 23 — Integrity Constraint Violation by PostGreSQL Error Code Between 23000 and 24000
             if(Integer.parseInt(e.getSQLState()) >= 23000 && Integer.parseInt(e.getSQLState()) <= 24000) //
