@@ -122,8 +122,8 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             stmt.setString(2, _senha);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            rs.close();
             stmt.close();
+            rs.close();
             this.closeConnection();
             if (agentes != null) {
                 return agentes.get(0);
@@ -139,15 +139,15 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
                     + " inner join AgenteSaude AG on AG.IdAgenteSaude =  P.IdPaciente "
                     + " inner join Estado E on E.IdEstado = AG.Idestado "
                     + " WHERE CPF LIKE ? ";
-            PreparedStatement stmt;
+        PreparedStatement stmt;
         try {
             this.openConnection();
             stmt = this.con.prepareStatement(query);
             stmt.setString(1, cpf);
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
-            rs.close();
             stmt.close();
+            rs.close();            
             this.closeConnection();
             if (agentes != null) {
                 return agentes.get(0);

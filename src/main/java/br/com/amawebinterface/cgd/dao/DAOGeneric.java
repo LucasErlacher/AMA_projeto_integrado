@@ -17,15 +17,14 @@ public class DAOGeneric {
     }
 
     protected ResultSet executeQuery(PreparedStatement statement) {
-        // Comando para select		
+        // Comando para select
+        ResultSet rs = null;
         try {
-            ResultSet rs = statement.executeQuery();            
-            statement.close();
-            return rs;
+            rs = statement.executeQuery();            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return rs;
     }
 
     protected int executeUpdate(PreparedStatement statement){
@@ -37,7 +36,6 @@ public class DAOGeneric {
             while (rs.next()) {
                 numero = rs.getInt(1);
             }
-            rs.close();
             statement.close();
         }catch (PSQLException e) {
             //Class 23 — Integrity Constraint Violation by PostGreSQL Error Code Between 23000 and 24000
