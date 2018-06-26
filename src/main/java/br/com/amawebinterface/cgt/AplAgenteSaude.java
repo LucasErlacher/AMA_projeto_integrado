@@ -2,7 +2,7 @@ package br.com.amawebinterface.cgt;
 
 import br.com.amawebinterface.cdp.AgenteSaude;
 import br.com.amawebinterface.cdp.ETipoRegistro;
-import br.com.amawebinterface.cgd.DAO.AgenteSaudeDAO;
+import br.com.amawebinterface.cgd.dao.AgenteSaudeDAO;
 
 public class AplAgenteSaude extends AplPaciente{
 

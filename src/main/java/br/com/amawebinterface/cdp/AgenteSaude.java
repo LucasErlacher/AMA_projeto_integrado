@@ -1,6 +1,6 @@
 package br.com.amawebinterface.cdp;
 
-import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+import br.com.amawebinterface.util.excecoes.DadoInvalidoException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

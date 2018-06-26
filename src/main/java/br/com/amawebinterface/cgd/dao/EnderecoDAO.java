@@ -1,4 +1,4 @@
-package br.com.amawebinterface.cgd.DAO;
+package br.com.amawebinterface.cgd.dao;
 
 import br.com.amawebinterface.cdp.Endereco;
 import java.sql.Connection;

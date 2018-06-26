@@ -1,6 +1,6 @@
-package br.com.amawebinterface.cgd.DAO;
+package br.com.amawebinterface.cgd.dao;
 
-import br.com.amawebinterface.util.Excecoes.DadoRepetidoException;
+import br.com.amawebinterface.util.excecoes.DadoRepetidoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

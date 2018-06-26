@@ -2,7 +2,7 @@ package br.com.amawebinterface.cgt;
 
 
 import br.com.amawebinterface.cdp.Endereco;
-import br.com.amawebinterface.cgd.DAO.EnderecoDAO;
+import br.com.amawebinterface.cgd.dao.EnderecoDAO;
 import java.sql.SQLException;
 
 

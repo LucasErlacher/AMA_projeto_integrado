@@ -1,4 +1,4 @@
-package br.com.amawebinterface.cgd.DAO;
+package br.com.amawebinterface.cgd.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,10 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.amawebinterface.cdp.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.postgresql.util.PSQLException;
 
 public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
-
+    
+    private final Logger logger = Logger.getLogger(PacienteDAO.class.getName());
     public PacienteDAO() {
     }
 
@@ -27,7 +30,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             stmt.close();
             this.closeConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return pacientes;
     }
@@ -37,7 +40,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
         try {
             this.openConnection();
             String query = "SELECT * FROM PACIENTE WHERE ID = ? ";
-            PreparedStatement stmt = this.con.prepareStatement(query);;
+            PreparedStatement stmt = this.con.prepareStatement(query);
             stmt.setLong(0, id);
             ResultSet rs = this.executeQuery(stmt);
             List<Paciente> pacientes = retrivePacientes(rs);
@@ -46,9 +49,9 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             this.closeConnection();
             return pacientes.get(0);
         } catch (PSQLException e) {
-
+            logger.log(Level.SEVERE, e.getMessage());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return null;
     }
@@ -63,7 +66,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             executeUpdate(stmt);
             this.closeConnection();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -87,9 +90,9 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             paciente.setId(i);            
             this.closeConnection();
         } catch (PSQLException e) {
-            System.out.println("O codigo do erro gerado foi: " + e.getErrorCode());
+            logger.log(Level.SEVERE, e.getMessage());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
 
     }
@@ -108,7 +111,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             paciente.setId(i);
             this.closeConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -126,9 +129,9 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            return (pacientes.size() > 0 ? pacientes.get(0) : paciente);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if(pacientes.size() > 0 )return pacientes.get(0);
+            } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return paciente;
     }
@@ -145,9 +148,9 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             rs.close();
             stmt.close();
             this.closeConnection();
-            return (pacientes.size() > 0 ? pacientes.get(0) : paciente);
+            if(pacientes.size() > 0 )return pacientes.get(0);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return null;
     }

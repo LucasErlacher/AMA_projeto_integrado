@@ -1,4 +1,4 @@
-package br.com.amawebinterface.cgd.DAO;
+package br.com.amawebinterface.cgd.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

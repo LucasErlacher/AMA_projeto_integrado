@@ -1,13 +1,14 @@
 package br.com.amawebinterface.cdp;
 
-import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+import br.com.amawebinterface.util.excecoes.DadoInvalidoException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Paciente {
+public class Paciente{
 
     private int id;
 

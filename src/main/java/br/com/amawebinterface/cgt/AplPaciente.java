@@ -2,7 +2,7 @@ package br.com.amawebinterface.cgt;
 
 import br.com.amawebinterface.cdp.ESexo;
 import br.com.amawebinterface.cdp.Paciente;
-import br.com.amawebinterface.cgd.DAO.PacienteDAO;
+import br.com.amawebinterface.cgd.dao.PacienteDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

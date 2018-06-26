@@ -2,7 +2,7 @@ package br.com.amawebinterface.testes;
 
 import br.com.amawebinterface.cdp.Paciente;
 import br.com.amawebinterface.cgt.AplPaciente;
-import br.com.amawebinterface.util.Excecoes.DadoRepetidoException;
+import br.com.amawebinterface.util.excecoes.DadoRepetidoException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

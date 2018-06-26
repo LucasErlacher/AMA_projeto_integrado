@@ -20,18 +20,18 @@ public class PacienteController {
     private final AplPaciente aplPaciente = new AplPaciente();
 
     @RequestMapping(value = "/Paciente/LoginPaciente")
-    public String LoginPaciente() {
+    public String loginPaciente() {
         return "Paciente/LoginPaciente";
     }
     
     @RequestMapping(value = "/Paciente/LogoutPaciente")
-    public String LogoutPaciente(HttpSession session) {
+    public String logoutPaciente(HttpSession session) {
         session.removeAttribute("pacienteLogado");
         return "Paciente/LoginPaciente";
     }
 
     @RequestMapping(value = "/Paciente//CadastrarPaciente")
-    public String CadastroPaciente() {
+    public String cadastroPaciente() {
         return "Paciente/CadastrarPaciente";
     }
 
