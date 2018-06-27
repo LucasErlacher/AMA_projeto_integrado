@@ -19,7 +19,7 @@ before_install:
 script:  
   - mvn test
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar > sonar.txt
-  - sh breakingbuildsonar.sh sonar.txt <token_do_sonar> <URL do Servidor do Sonar>
+  - sh breakingbuildsonar.sh sonar.txt $sonnar_key https://sonarcloud.io
   - rm sonar.txt
   
   
