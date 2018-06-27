@@ -13,9 +13,16 @@ addons:
     token:
       secure: $sonnar_key
 
-script:  
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+before_install:
+  - sudo apt-get install -y jq
 
+script:  
+  - mvn test
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar > sonar.txt
+  - sh breakingbuildsonar.sh sonar.txt <token_do_sonar> <URL do Servidor do Sonar>
+  - rm sonar.txt
+  
+  
 #after_success:
 #    - HEROKU_API_KEY=$HEROKU_API_KEY mvn clean heroku:deploy-war
 
