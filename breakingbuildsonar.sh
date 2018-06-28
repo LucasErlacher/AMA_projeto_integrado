@@ -9,6 +9,8 @@ url=$(grep "/api/ce/task?id=" $1 | sed s/.*h// )
 
 echo "Searching at h$url"
 
+curl -u $2: "h$url"
+
 analysisId=$(curl -u $2: "h$url" | jq -r '.task.analysisId')
 
 echo "AnalysisID: $analysisId"
