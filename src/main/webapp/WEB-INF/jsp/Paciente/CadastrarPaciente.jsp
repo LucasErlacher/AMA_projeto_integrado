@@ -15,7 +15,7 @@
             <div class="card card-container">
                 <h3 style="text-align: center;">Cadastro de Pacientes</h3><hr>
                 <p id="profile-name" class="profile-name-card"></p>
-                <form class="form-signin" id="formulario" action="adicionarPaciente" method="POST" >
+                <form class="form-signin" id="formulario" action="NovoPaciente" method="POST" >
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome" required autofocus>
                     <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" required >

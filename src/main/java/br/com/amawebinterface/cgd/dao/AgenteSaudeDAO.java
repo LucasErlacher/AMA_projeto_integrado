@@ -112,7 +112,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
-            if (agentes != null) {
+            if (agentes.size() > 0) {
                 agente = agentes.get(0);
             }
         } catch (SQLException e) {
@@ -135,7 +135,7 @@ public class AgenteSaudeDAO extends DAOGeneric implements DAO<AgenteSaude> {
             ResultSet rs = this.executeQuery(stmt);
             List<AgenteSaude> agentes = retriveAgenteSaude(rs);
             rs.close();
-            if (agentes != null) {
+            if (agentes.size() > 0) {
                 agente = agentes.get(0);
             }
         } catch (SQLException | NullPointerException e) {

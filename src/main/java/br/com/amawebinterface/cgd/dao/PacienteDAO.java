@@ -122,7 +122,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             ResultSet rs = this.executeQuery(stmt);
             List<Paciente> pacientes = retrivePacientes(rs);
             rs.close();
-            if (paciente != null) {
+            if (pacientes.size() > 0) {
                 paciente = pacientes.get(0);
             }
         } catch (SQLException e) {
@@ -142,7 +142,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
             ResultSet rs = this.executeQuery(stmt);
             List<Paciente> pacientes = retrivePacientes(rs);
             rs.close();
-            if (pacientes != null) {
+            if (pacientes.size() > 0) {
                 paciente = pacientes.get(0);
             }
         } catch (SQLException e) {
@@ -166,7 +166,7 @@ public class PacienteDAO extends DAOGeneric implements DAO<Paciente> {
                 paciente.setDataNascimento(rs.getDate("datanascimento"));
                 paciente.setEnum_sexo(rs.getInt("idsexo"));
                 pacientes.add(paciente);
-            }            
+            }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

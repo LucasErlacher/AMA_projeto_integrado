@@ -15,8 +15,7 @@ public class DAOGeneric {
     private static final Logger logger = Logger.getLogger(DAOGeneric.class.getName());
 
     protected void openConnection() {
-        con = ConnectionFactory.getConnection();
-        //this.hashError.new HashMap<Integer,Integer>();
+        con = ConnectionFactory.getConnection();        
     }
 
     protected ResultSet executeQuery(PreparedStatement statement) {

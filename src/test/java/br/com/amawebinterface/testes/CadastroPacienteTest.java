@@ -15,7 +15,7 @@ import org.junit.Assert;
 public class CadastroPacienteTest {
 
     private Paciente paciente;
-    private final AplPaciente aplPaciente = new AplPaciente();
+    private final AplPaciente aplPaciente = AplPaciente.getInstance();
     private String dadoAntigo;
 
     @Given("^Eu sou um paciente nao cadastrado\\.$")

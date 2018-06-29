@@ -16,7 +16,7 @@ import org.junit.Assert;
 public class CadastroAgenteSaudeTest {
 
     private AgenteSaude agente;
-    private final AplAgenteSaude aplAgenteSaude = new AplAgenteSaude();
+    private final AplAgenteSaude aplAgenteSaude = AplAgenteSaude.getInstance();
     private String dadoAntigo;
 
     @Given("^Eu sou um agentesaude nao cadastrado\\.$")

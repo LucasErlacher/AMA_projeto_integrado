@@ -133,3 +133,11 @@ body, html {
     margin: 1em;
     border-color: black;
 }
+
+.linha{
+    margin-top: 4em !important;
+}
+
+.dropopcoes{
+    margin: 0.5em;
+}

@@ -7,29 +7,42 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AplPaciente {
-    
+
     private final PacienteDAO pacienteDAO = new PacienteDAO();
+    private static AplPaciente instance;
+
+    public static AplPaciente getInstance() {
+        if (instance == null) {
+            instance = new AplPaciente();
+        }
+        return instance;
+    }
+
+    private AplPaciente() {
+    }
+
+    ;
     
     public void cadastrarPaciente(Paciente paciente) {
         if ((paciente.validaPaciente())) {
             this.pacienteDAO.insert(paciente);
         }
     }
-    
+
     public Paciente consultarPacienteCPF(Paciente paciente) {
-        Paciente pacientePeloCPF = this.pacienteDAO.getByCPF(paciente.getCpf());
-        return pacientePeloCPF;
+        return this.pacienteDAO.getByCPF(paciente.getCpf());
     }
-    
+
     public Paciente consultarPacienteLogineSenha(Paciente paciente) {
-        Paciente pacientePeloLogineSenha = this.pacienteDAO.getByLoginAndSenha(paciente.getCpf(), paciente.getSenha());
-        return pacientePeloLogineSenha;
+        return this.pacienteDAO.getByLoginAndSenha(paciente.getCpf(), paciente.getSenha());
     }
-    
+
     public void alteraDadosPaciente(Paciente paciente) {
-        if(paciente.validaPaciente())this.pacienteDAO.update(paciente);
+        if (paciente.validaPaciente()) {
+            this.pacienteDAO.update(paciente);
+        }
     }
-    
+
     public void listarDados(Paciente paciente) {
         paciente = this.pacienteDAO.getByCPF(paciente.getCpf());
         System.out.println("Seu nome eh: " + paciente.getNome());
@@ -41,5 +54,4 @@ public class AplPaciente {
         System.out.println("Sua data de nascimento eh: " + full);
         System.out.println("Sexo: " + ESexo.getByCodigo(paciente.getEnum_sexo()).toString());
     }
-    
 }

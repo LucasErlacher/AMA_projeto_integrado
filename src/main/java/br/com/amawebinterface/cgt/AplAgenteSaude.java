@@ -6,15 +6,27 @@ import br.com.amawebinterface.cgd.dao.AgenteSaudeDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AplAgenteSaude extends AplPaciente {
+public class AplAgenteSaude {
 
     private final AgenteSaudeDAO agenteDAO = new AgenteSaudeDAO();
+    private static AplAgenteSaude instance;
+    private final AplPaciente aplPaciente = AplPaciente.getInstance();
     private static final Logger logger = Logger.getLogger(AplAgenteSaude.class.getName());
 
-    public void cadastrarAgenteSaude(AgenteSaude agente) {
-        if (agente.validaAgenteSaude()) {
-            this.agenteDAO.insert(agente);
+    public static AplAgenteSaude getInstance() {
+        if (instance == null) {
+            instance = new AplAgenteSaude();
         }
+        return instance;
+    }
+
+    private AplAgenteSaude() {
+    }
+
+    ;
+    
+    public void cadastrarAgenteSaude(AgenteSaude agente) {
+        if (agente.validaAgenteSaude()){this.agenteDAO.insert(agente);}
     }
 
     public AgenteSaude consultarAgenteCPF(AgenteSaude agente) {
@@ -23,13 +35,13 @@ public class AplAgenteSaude extends AplPaciente {
 
     public void alteraDadosAgente(AgenteSaude agente) {
         if (agente.validaAgenteSaude()) {
-            this.alteraDadosPaciente(agente);
+            this.aplPaciente.alteraDadosPaciente(agente);
         }
     }
 
     public void listarDados(AgenteSaude agente) {
         agente = this.agenteDAO.getByCPF(agente.getCpf());
-        super.listarDados(agente);
+        this.aplPaciente.listarDados(agente);
         logger.log(Level.SEVERE, "ID : {0}", agente.getId());
         logger.log(Level.SEVERE, "Possui Inscricao : {0}", agente.getInscricao());
         logger.log(Level.SEVERE, "Do Estado: {0}", agente.getEstado());

@@ -23,5 +23,5 @@
         </div>        
         <script src="${cp}/resources/js/jquery-2.2.4.js"></script>
         <script src="${cp}/resources/js/Bootstrap/bootstrap.min.js" /></script>
-</body>
+    </body>
 </html>

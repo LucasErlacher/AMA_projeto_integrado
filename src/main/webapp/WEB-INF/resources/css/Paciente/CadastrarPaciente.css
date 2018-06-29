@@ -45,6 +45,8 @@ body, html {
 
 
 .form-signin #email,
+.form-signin #senhaNova,
+.form-signin #senhaNova2,
 .form-signin #nome,
 .form-signin #dataNascimento,
 .form-signin #cpf,
