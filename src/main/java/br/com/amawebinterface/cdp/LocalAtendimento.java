@@ -3,6 +3,7 @@ package br.com.amawebinterface.cdp;
 import java.util.List;
 
 public class LocalAtendimento {
+
     private String nome;
     private String cnpj;
     private List<Endereco> enderecos;

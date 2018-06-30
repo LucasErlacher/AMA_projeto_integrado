@@ -2,8 +2,8 @@ package br.com.amawebinterface.cgt;
 
 
 import br.com.amawebinterface.cdp.Endereco;
-import br.com.amawebinterface.cgd.DAO.EnderecoDAO;
-import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+import br.com.amawebinterface.cgd.dao.EnderecoDAO;
+import br.com.amawebinterface.util.excecoes.DadoInvalidoException;
 import java.sql.SQLException;
 
 
@@ -41,23 +41,23 @@ public class AplEndereco{
 	public boolean cadastrarEndereco(Endereco endereco){
 		boolean result=false;
 		try{
-			this.validaEndereco(endereco);
-			enderecoDAO.insert(endereco);
-			result = true;
-		}catch (SQLException e){
-			e.printStackTrace();
-			result = false;
+                    this.validaEndereco(endereco);
+                    enderecoDAO.insert(endereco);
+                    result = true;
+		}catch (Exception e){
 		}finally {
-			return result;
+                    return result;
 		}
 	}
 
-	public int alterarDadosEndereco(Endereco endereco, String numero, String complemento) throws SQLException{
-		return enderecoDAO.update(endereco.getIdendereco(), numero,complemento);
+	public void alterarDadosEndereco(Endereco endereco, String numero, String complemento) throws SQLException{
+            endereco.setNumero(numero);
+            endereco.setComplemento(complemento);
+            enderecoDAO.update(endereco);
 	}
 	
-	public Endereco consultaEndereco(int idendereco) throws SQLException {
-		return enderecoDAO.getById(idendereco);
+	public Endereco consultaEndereco(Long idendereco) throws SQLException {
+		return enderecoDAO.findbyID(idendereco);
 	}
 	
 	
@@ -68,17 +68,7 @@ public class AplEndereco{
 		System.out.println("Cidade: "+endereco.getCidade());
 	}
 	
-	public int excluirEndereco(Endereco endereco) throws SQLException {
-		return enderecoDAO.delete(endereco);
+	public void excluirEndereco(Endereco endereco) throws SQLException {
+		enderecoDAO.delete(endereco);
 	}
 }
-
-
-
-
-
-
-
-
-
-

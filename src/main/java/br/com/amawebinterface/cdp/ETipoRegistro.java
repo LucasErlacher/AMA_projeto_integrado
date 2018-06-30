@@ -15,13 +15,13 @@ public enum ETipoRegistro {
     public int getCodigo() {
         return codigo;
     }
-    
+
     public static ETipoRegistro getByCodigo(int cod) {
         for (ETipoRegistro es : values()) {
             if (es.codigo == cod) {
                 return es;
             }
         }
-     throw new IllegalArgumentException("Enum invalido: " + cod);
+        throw new IllegalArgumentException("Enum invalido: " + cod);
     }
 }

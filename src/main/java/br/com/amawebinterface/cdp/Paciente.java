@@ -1,6 +1,6 @@
 package br.com.amawebinterface.cdp;
 
-import br.com.amawebinterface.util.Excecoes.DadoInvalidoException;
+import br.com.amawebinterface.util.excecoes.DadoInvalidoException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,10 +23,10 @@ public class Paciente {
     private String email;
     private int enum_sexo;
 
+    private List<Consulta> consultas;
+
     //???????
     private int enum_usuario;
-
-    private List<Consulta> consultas;
 
     //Construtor
     public Paciente(int _id, String _cpf, String _senha, Date _dataNascimento,
@@ -112,11 +112,19 @@ public class Paciente {
         this.enum_usuario = _enum_usuario;
     }
 
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+
     public boolean validaPaciente() {
         if (this.cpf == null) {
             throw new DadoInvalidoException("O campo Cpf está inválido.");
         }
-        if (this.dataNascimento== null) {
+        if (this.dataNascimento == null) {
             throw new DadoInvalidoException("O campo Data Nascimento está inválido.");
         }
         if (this.nome == null) {
@@ -133,7 +141,7 @@ public class Paciente {
         if (!sexos.contains(ESexo.getByCodigo(this.enum_sexo))) {
             throw new DadoInvalidoException("O campo Sexo está inválido.");
         }
-        
+
         return true;
     }
 

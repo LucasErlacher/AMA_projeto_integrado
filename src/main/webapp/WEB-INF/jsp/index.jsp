@@ -16,12 +16,12 @@
             <br>
             <center>
                 <h2 class="titulo-ama"><b>Seja bem-vindo ao AMA!</b></h2><br>
-                <a class="btn btn-primary btn-md" href="Paciente/EfetuarLoginPaciente">Área do Paciente</a><br><br>                     
+                <a class="btn btn-primary btn-md" href="Paciente/LoginPaciente">Área do Paciente</a><br><br>                     
                 <a class="btn btn-primary btn-md" href="#">Área do Agente de Saúde</a><br><br>                     
             </center>
             <br>
         </div>        
         <script src="${cp}/resources/js/jquery-2.2.4.js"></script>
         <script src="${cp}/resources/js/Bootstrap/bootstrap.min.js" /></script>
-</body>
+    </body>
 </html>

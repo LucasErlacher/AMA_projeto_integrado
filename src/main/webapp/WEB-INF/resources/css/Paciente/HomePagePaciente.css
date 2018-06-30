@@ -36,20 +36,42 @@ body, html {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
 
 /*
  * Form styles
  */
+.profile-name-card {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 1em;
+}
 
+.reauth-email {
+    display: block;
+    color: #404040;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
-
-.form-signin #email,
-.form-signin #senhaNova,
-.form-signin #senhaNova2,
-.form-signin #nome,
-.form-signin #dataNascimento,
-.form-signin #cpf,
 .form-signin #email,
 .form-signin #senha {
     direction: ltr;
@@ -58,13 +80,12 @@ body, html {
 }
 
 .form-signin input[type=email],
-.form-signin input[type=date],
 .form-signin input[type=password],
 .form-signin input[type=text],
 .form-signin button {
     width: 100%;
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     z-index: 1;
     position: relative;
     -moz-box-sizing: border-box;
@@ -97,22 +118,26 @@ body, html {
     transition: all 0.218s;
 }
 
-
-
-.radio-group label {
-   overflow: hidden;
-} .radio-group input {
-    /* This is on purpose for accessibility. Using display: hidden is evil.
-    This makes things keyboard friendly right out tha box! */
-   height: 1px;
-   width: 1px;
-   position: absolute;
-   top: -20px;
-} .radio-group .not-active  {
-   color: #3276b1;
-   background-color: #fff;
+.prettyline {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
-.radio-genero{
-    margin-bottom: 1em;
+.logoutbutton{
+    margin: 1em;
+    border-color: black;
+}
+
+.linha{
+    margin-top: 4em !important;
+}
+
+.dropopcoes{
+    margin: 0.5em;
 }

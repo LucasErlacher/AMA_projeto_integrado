@@ -1,6 +1,7 @@
 package br.com.amawebinterface.cdp;
 
 public class Contato {
+
     private String descricao;
     private int enum_tipocontato;
 
@@ -18,5 +19,5 @@ public class Contato {
 
     public void setEnum_tipocontato(int enum_tipocontato) {
         this.enum_tipocontato = enum_tipocontato;
-    }                
+    }
 }

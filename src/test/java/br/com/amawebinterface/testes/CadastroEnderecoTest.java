@@ -20,7 +20,9 @@ public class CadastroEnderecoTest {
     @Given("^Um endereco cadastrado$")
     public void umEnderecoCadastrado() throws Throwable {
         //defnido pegar o endercod e id 10
-        this.endereco = this.aplendereco.consultaEndereco(10);
+        
+        
+        this.endereco = this.aplendereco.consultaEndereco(new Long(10));
     }
 
     @When("^Entro com dados validos$")
@@ -49,7 +51,7 @@ public class CadastroEnderecoTest {
     @When("^Entro com dados novos$")
     public void entroComDadosNovos() throws Throwable {
         aplendereco.alterarDadosEndereco(this.endereco, "199", "502");
-        this.endereco = aplendereco.consultaEndereco(this.endereco.getIdendereco());
+        this.endereco = aplendereco.consultaEndereco(new Long(this.endereco.getIdendereco()));
         System.out.println(this.endereco.getNumero());
     }
 
@@ -93,7 +95,7 @@ public class CadastroEnderecoTest {
 
     @Then("^Recebo uma mensagem informando que o endereco foi excluido$")
     public void receboUmaMensagemInformandoQueOEnderecoFoiExcluido() throws Throwable {
-        this.endereco = aplendereco.consultaEndereco(this.endereco.getIdendereco());
+        this.endereco = aplendereco.consultaEndereco(new Long(this.endereco.getIdendereco()));
         Assert.assertNotNull("Endereco excluido", this.endereco);
     }
 }

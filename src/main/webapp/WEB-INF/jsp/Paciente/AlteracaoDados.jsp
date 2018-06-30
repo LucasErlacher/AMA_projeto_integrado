@@ -7,38 +7,37 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Area do Paciente</title>
-        <link rel="stylesheet"  href="${cp}/resources/css/Paciente/LoginPaciente.css"/>
+        <link rel="stylesheet"  href="${cp}/resources/css/Paciente/CadastrarPaciente.css"/>
         <link rel="stylesheet"  href="${cp}/resources/css/Bootstrap/bootstrap.min.css"/>
     </head>
     <body>
         <div class="container">
             <div class="card card-container">
-                <h3 style="text-align: center;">Paciente</h3><hr>
-                <img id="profile-img" class="profile-img-card" src="${cp}/resources/images/avatarlogin.png" />
+                <h3 style="text-align: center;">Digite seus novos dados</h3><hr>
                 <p id="profile-name" class="profile-name-card"></p>
-                <form class="form-signin" action="HomePagePaciente" id="formulario" method="POST">
+                <form class="form-signin" action="alterarDados" id="formulario" method="POST">
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="text" id="email" name="cpf" class="form-control" placeholder="CPF" required autofocus>
-                    <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
-                </form><!-- /form -->
-                <a href="CadastrarPaciente" class="forgot-password">
-                    Ainda não é cadastrado? 
-                </a>
+                    <input type="email" id="senha" name="email" class="form-control" placeholder="Email" required>
+                    <input type="password" id="senhaNova" name="senha" class="form-control" placeholder="Nova Senha" required>                    
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Alterar</button>
+                </form><!-- /form -->        
             </div><!-- /card-container -->
         </div><!-- /container -->
         <script src="${cp}/resources/js/jquery-2.2.4.js"></script>
         <script src="${cp}/resources/js/Bootstrap/bootstrap.min.js" /></script>
-        <script type="text/javascript" src="${cp}/resources/js/jquery.mask.js"></script>        
+        <script type="text/javascript" src="${cp}/resources/js/jquery.mask.js"></script>
         <script>
-            var cpf = $("#email");
+            
+            var cpf = $('#cpf');
             $(document).ready(function () {
                 cpf.mask("000.000.000-00");
             });
 
             $("#formulario").submit(function () {
-                cpf.unmask();
+                cpf.unmask();                                
             });
+                        
         </script>
 </body>
 </html> 

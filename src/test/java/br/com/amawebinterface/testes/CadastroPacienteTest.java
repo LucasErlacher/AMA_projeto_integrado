@@ -2,6 +2,7 @@ package br.com.amawebinterface.testes;
 
 import br.com.amawebinterface.cdp.Paciente;
 import br.com.amawebinterface.cgt.AplPaciente;
+import br.com.amawebinterface.util.excecoes.DadoRepetidoException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,7 +15,7 @@ import org.junit.Assert;
 public class CadastroPacienteTest {
 
     private Paciente paciente;
-    private final AplPaciente aplPaciente = new AplPaciente();
+    private final AplPaciente aplPaciente = AplPaciente.getInstance();
     private String dadoAntigo;
 
     @Given("^Eu sou um paciente nao cadastrado\\.$")
@@ -51,7 +52,7 @@ public class CadastroPacienteTest {
 
     @When("^Eu entro com dados registrados\\.$")
     public void euEntroComDadosRegistrados() throws Throwable {
-        paciente.setCpf("14805897724");
+        paciente.setCpf("13989292714");
     }
 
     @When("^Eu entro com dados novos\\.$")
@@ -86,16 +87,13 @@ public class CadastroPacienteTest {
 
     @Then("^Eu recebo uma mensagem de alerta informando que ja tenho acesso\\.$")
     public void euReceboUmaMensagemDeAlertaInformandoQueJaTenhoAcesso() throws Throwable {
-//        boolean result = false;
-//        try {
-//            aplPaciente.cadastrarPaciente(paciente);
-//        } catch (Exception e) {
-//            result = true;
-//            e.printStackTrace();
-//        }
-//        Assert.assertTrue("Voce ja tem acesso", result);
-        aplPaciente.cadastrarPaciente(this.paciente);
-        Assert.assertEquals("Cadastro feito com sucesso", 0, paciente.getId());
+        boolean result = false;
+        try {
+            aplPaciente.cadastrarPaciente(this.paciente);
+        } catch (DadoRepetidoException e) {
+            result = true;
+        }
+        Assert.assertTrue("Não foi possivel cadastrar com os dados apresentados", result);
     }
 
     @Then("^Eu recebo uma mensagem de sucesso informando que os dados foram alterados\\.$")

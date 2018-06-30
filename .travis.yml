@@ -1,5 +1,6 @@
 language: java
 
+sudo: enable
 
 dist: trusty
 
@@ -11,17 +12,10 @@ addons:
     organization: "lucaserlacher-github"
     token:
       secure: $sonnar_key
-      
-deploy:
- provider: heroku
- api_key:
-  secure: $heroku_key
- app:
-  master: amaproject
- on: master
 
 before_install:
   - sudo apt-get install -y jq
+
 
 script:  
   - mvn test
@@ -29,5 +23,13 @@ script:
   - sh breakingbuildsonar.sh sonar.txt $sonnar_key https://sonarcloud.io
   - rm sonar.txt
 
+branches:
+  only:
+    - master
+    - devTarcisio
+    - devCaio
+    - devLucas
+
 notifications:
- slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+  slack: bsi-ifserra:RCNpHRd9ys5acaqRPaFcNjVL
+
