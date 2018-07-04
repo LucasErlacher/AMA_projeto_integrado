@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AgenteSaude extends Paciente {
+public class AgenteSaude extends Paciente implements Observer{
 
     private String inscricao;
     private int enum_registro;
@@ -75,4 +75,13 @@ public class AgenteSaude extends Paciente {
         return false;
     }
 
+    @Override
+    public void update(Observavel observavel) {
+        if(observavel instanceof Consulta){
+            Consulta c = (Consulta)observavel;
+            if(c.getEnumStatus() == 2){
+                System.out.println("Email de Cancelamento recebido");
+            };
+        }
+    }
 }

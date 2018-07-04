@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Paciente {
+public class Paciente implements Observer{
 
     private int id;
 
@@ -41,7 +41,6 @@ public class Paciente {
         this.enum_usuario = _enum_usuario;
         this.enum_sexo = _enum_sexo;
         this.consultas = new ArrayList<>();
-
     }
 
     public Paciente() {
@@ -145,4 +144,13 @@ public class Paciente {
         return true;
     }
 
+    @Override
+    public void update(Observavel observavel) {
+        if(observavel instanceof Consulta){
+            Consulta c = (Consulta)observavel;
+            if(c.getEnumStatus() == 2){
+                System.out.println("Email de Cancelamento recebido");
+            };
+        }
+    }
 }

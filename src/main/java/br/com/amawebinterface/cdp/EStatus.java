@@ -5,7 +5,7 @@ public enum EStatus {
     CANCELADO(2),
     CONCLUIDO(3);
 
-    public final int codigo;
+    public int codigo;
 
     private EStatus(int _valorOpcao) {
         this.codigo = _valorOpcao;

@@ -2,7 +2,7 @@ package br.com.amawebinterface.cdp;
 
 import java.util.Date;
 
-public class Consulta {
+public class Consulta extends Observavel{
 
     private Paciente paciente;
     private AgenteSaude agenteSaude;
